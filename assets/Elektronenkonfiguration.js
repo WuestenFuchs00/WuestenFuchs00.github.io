@@ -152,12 +152,15 @@
 	function Elektronenkonfiguration (strSymbol) {
 		var Aufbauprinzip = ["1s","2s","2p","3s","3p","4s","3d","4p","5s","4d","5p","6s","4f","5d","6p","7s","5f","6d","7p","5g","6f","7d","6g","7f","6h","7g","7h","7i"];
 		var ordnung = 0;
+		var isFound = false;
 		for ( var elem in PSE ) {
-			if ( PSE[elem].symbol == strSymbol ) {
+			if ( PSE[elem].symbol.toLowerCase() == strSymbol.toLowerCase() ) {
 				ordnung = PSE[elem].ordnung;
+				isFound = true;
 				break;
 			}
 		}
+		if ( !isFound ) return "Oops. " + strSymbol + " cannot be found.";
 		var strAusgabe = "";
 		var orbital = 0;
 		for ( var i = 0; i < Aufbauprinzip.length; i++ ) {

@@ -6,26 +6,36 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8" /> <!-- HTML 4.x -->
   <meta http-equiv="expires" content="0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" /> 
+  <link href="https://fonts.googleapis.com/css?family=Abel|Notable|Roboto|Source+Serif+Pro" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="assets/Elektronenkonfiguration.css">
   <script language="javascript" type="text/javascript" src="assets/Elektronenkonfiguration.js"></script>
-  <link rel="stylesheet" type="text/css" href="assets/Elektronenkonfiguration.css"></style>
   <title>Electron Configuration</title>
 <body>
 <div id="mDivElektronenkonfiguration">
-	<h2>Electron Configuration</h2>
-	<p>Give the symbol of an element, e.g. He for Helium, Cl for Chlorine etc. Then click RUN.</p>  
-	<label for="mLabelElement">
-		<span style="font-size:18px;font-weight:bold;">Symbol:</span>
-		<input type="text" id="mInputElement" name="mInputElement" size="8" value="He" />
-		<input type="button" id="mButtonRun" name="mButtonRun" value="RUN" onclick="printElektronenkonfiguration()"></input>
-	</label>
-	<p></p>
-	<div id="mDivElektronenkonfigurationAusgabe" style="color:red;"></div>
+	<div id="mDivElektronenkonfigurationTitel">Electron Configuration</div>
+	<p>Give the symbol of an element, e.g. <b>He</b> for Helium, <b>Cl</b> for Chlorine etc. Then click <span style="padding:1px 3px;border:1px #000 solid;">RUN</span>.</p>
+	<div id="mDivElektronenkonfigurationLabel">
+		<label for="mLabel">
+			<span style="font-size:18px;font-weight:bold;">Symbol:</span>
+			<input type="text" id="mInputElement" name="mInputElement" size="8" value="He" />
+			<input type="button" id="mButtonRun" name="mButtonRun" value="RUN" onclick="printElektronenkonfiguration()"></input>
+			<input type="button" id="mButtonClear" name="mButtonClear" value="CLEAR" onclick="clearInput()"></input>
+		</label>
+	</div>
+	<div id="mDivElektronenkonfigurationAusgabe">NaN</div>
 </div>
 <script language="javascript" type="text/javascript">
 <!--
+	function clearInput () {
+		document.getElementById('mDivElektronenkonfigurationAusgabe').innerHTML = "NaN";
+		document.getElementById('mInputElement').value = "";
+		document.getElementById('mInputElement').focus();
+	}
+	
 	function printElektronenkonfiguration () {
 		var strAusgabe = Elektronenkonfiguration(document.getElementById('mInputElement').value);
 		document.getElementById('mDivElektronenkonfigurationAusgabe').innerHTML = strAusgabe.replace(/\(/g, "<sup>").replace(/\)/g, "</sup>&nbsp;");
+		document.getElementById('mInputElement').focus();
 	}
 -->
 </script>
