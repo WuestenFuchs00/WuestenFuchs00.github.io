@@ -15,7 +15,7 @@ div#mDivElektronenkonfigurationLabel  {
 	padding: 16px 6px; background-color: hsla(0, 100%, 90%, 0.3);
 }
 input#mButtonRun, input#mButtonClear {
-	width: 60px; font-size: 14px; padding: 6px;
+	width: 78px; font-size: 14px; padding: 6px;
 }
 div#mDivElektronenkonfigurationAusgabe {
 	padding: 6px; color: red; font-weight: bold;
