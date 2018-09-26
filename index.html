@@ -29,13 +29,11 @@
 	function clearInput () {
 		document.getElementById('mDivElektronenkonfigurationAusgabe').innerHTML = "NaN";
 		document.getElementById('mInputElement').value = "";
-		document.getElementById('mInputElement').focus();
 	}
 	
 	function printElektronenkonfiguration () {
 		var strAusgabe = Elektronenkonfiguration(document.getElementById('mInputElement').value);
 		document.getElementById('mDivElektronenkonfigurationAusgabe').innerHTML = strAusgabe.replace(/\(/g, "<sup>").replace(/\)/g, "</sup>&nbsp;");
-		document.getElementById('mInputElement').focus();
 	}
 -->
 </script>
