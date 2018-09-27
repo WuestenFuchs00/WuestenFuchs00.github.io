@@ -16,26 +16,14 @@
 	<p>Give the symbol of an element, e.g. <b>He</b> for Helium, <b>Cl</b> for Chlorine etc. Then click <span style="padding:1px 3px;border:1px #000 solid;">RUN</span>.</p>
 	<div id="mDivElektronenkonfigurationLabel">
 		<label for="mLabel">
-			<span style="font-size:18px;font-weight:bold;">Symbol:</span>
-			<input type="text" id="mInputElement" name="mInputElement" size="8" value="He" />
+			<span>Symbol:</span>
+			<input type="text" id="mInputElement" name="mInputElement" size="12" value="He" />
 			<input type="button" id="mButtonRun" name="mButtonRun" value="RUN" onclick="printElektronenkonfiguration()"></input>
 			<input type="button" id="mButtonClear" name="mButtonClear" value="CLEAR" onclick="clearInput()"></input>
 		</label>
 	</div>
 	<div id="mDivElektronenkonfigurationAusgabe">NaN</div>
 </div>
-<script language="javascript" type="text/javascript">
-<!--
-	function clearInput () {
-		document.getElementById('mDivElektronenkonfigurationAusgabe').innerHTML = "NaN";
-		document.getElementById('mInputElement').value = "";
-	}
-	
-	function printElektronenkonfiguration () {
-		var strAusgabe = Elektronenkonfiguration(document.getElementById('mInputElement').value);
-		document.getElementById('mDivElektronenkonfigurationAusgabe').innerHTML = strAusgabe.replace(/\(/g, "<sup>").replace(/\)/g, "</sup>&nbsp;");
-	}
--->
-</script>
 </body>
+<script language="javascript" type="text/javascript" src="assets/script.js"></script>
 </html>
