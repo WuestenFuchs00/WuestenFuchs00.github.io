@@ -1,0 +1,39 @@
+VirutalBox:: Shared folder (Gemeinsamer Ordner)  Host <-> Guest
+
+1. Install GuestAddition on guest machine.
+   Guest machine: Device(Gerät) --> GastAddition(Gasterweiterung einlegen..)
+   Guest machine: Device(Gerät) --> Drag and Drop --> bindirectional
+
+2. Neustarten guest machine
+
+3. Folowing those steps:
+	https://help.ubuntu.com/community/VirtualBox/SharedFolders
+
+-Create a folder on the Host computer (ubuntu) that you would like to share, for example ~/share
+-Boot the Guest operating system in VirtualBox.
+-Select Devices -> Shared Folders...
+-Choose the 'Add' button.
+-Select ~/share
+
+4. Start terminal in guest machine and run following codes:
+
+sharename="share"
+sudo mkdir /mnt/$sharename 
+sudo chmod 777 /mnt/$sharename 
+sudo mount -t vboxsf -o uid=1000,gid=1000 $sharename /mnt/$sharename 
+ln -s /mnt/$sharename $HOME/Desktop/$sharename
+
+
+
+if  not in /mnt/, use /media/ instead:
+
+sharename="share"
+sudo mkdir /media/$sharename 
+sudo chmod 777 /media/$sharename 
+sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) $sharename /media/$sharename 
+
+ln -s /media/$sharename $HOME/Desktop/$sharename
+
+oder:
+
+ln -s /media/$sharename $HOME/Schreibtisch/$sharename
