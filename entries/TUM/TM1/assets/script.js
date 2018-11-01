@@ -8,9 +8,9 @@
 	 */
 	function mGetWindowSize() {
 		var w = window, b = document.body, e = document.documentElement
-			x = w.innerWidth || b.clientWidth || e.clientWidth,
-			y = w.innerHeight || b.clientHeight || e.clientHeight;
-		return {x,y}; // {width,height}
+			width = w.innerWidth || b.clientWidth || e.clientWidth,
+			height = w.innerHeight || b.clientHeight || e.clientHeight;
+		return {width, height};
 	}
 	
 	/*
@@ -20,9 +20,12 @@
 		// Get image size
 		var imgWidth = o.getBoundingClientRect().width,
 			imgHeight = o.getBoundingClientRect().height;
-		// Calculate (new) image size, related to current window size
-		var newImgWidth = mGetWindowSize().x,
-			newImgHeight = (imgHeight / imgWidth) * newImgWidth;
+		// Calculate (new) image size, related to (current) window size
+		var offset = 5*6; // from css style, margin left/right, factor 5x
+		var windowSize = mGetWindowSize();
+		var newImgWidth = ( imgWidth > windowSize.width ) ? windowSize.width : imgWidth;
+		newImgWidth -= offset;
+		var newImgHeight = ( imgWidth > windowSize.width ) ? (imgHeight / imgWidth) * newImgWidth : imgHeight;
 		// Set image size
 		o.setAttribute("style","width:" + newImgWidth + "px");
 		o.setAttribute("style","height:" + newImgHeight + "px");
