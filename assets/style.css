@@ -1,0 +1,55 @@
+/**
+ * style.css
+ */
+html, body {
+	width: 100%; margin: 0; padding:0;
+}
+div#mHeaderTitle {
+	padding: 10px 6px; background-color: rgba(88,24,69,.99); color: #fff; font-family: 'Notable', sans-serif;
+	font-size: 32px; font-weight: bold; box-shadow: 2px 3px 4px #696969;
+}
+div#mContent > p {
+	margin: 18px 6px; font-family: 'Abel', sans-serif; font-size: 20px;
+}
+div.mSection {
+	margin-top: 10px; font-family: 'Roboto'; /* padding: 1px 6px 0px 6px; */
+}
+div.mSection:nth-child(2n) {
+	background-color: rgba(236,231,229,.9);
+}
+div.mSubsection {
+	margin-left: 6px;
+}
+div.mSubsection:first-child {
+	padding-top: 10px;
+}
+div.mTopic {
+	height: 60px; width: 60px; overflow: hidden; background-color: rgba(231,76,60,.99); background-repeat: no-repeat; 
+	margin: 0 10px 10px 0; float: left; box-shadow: 3px 3px 3px rgba(171,178,185,1); border-radius: 6px; 
+	background-color: rgba(231,76,60,.99); background: linear-gradient(45deg, #cb4335, #e74c3c, #ec7063 86%);
+}
+div.mTopic:nth-child(1) {
+	background-color: rgba(241,196,15,.99); background: linear-gradient(45deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 86%);
+}
+div.mTopic:nth-child(2) {
+	background-color: rgba(214,137,16,.99); background: linear-gradient(45deg, #d68910, #f39c12, #f5b041, #f8c471 86%);
+}
+div.mTopic:nth-child(3) {
+	background-color: rgba(231,76,60,.99); background: linear-gradient(45deg, #cb4335, #e74c3c, #ec7063, #f5b7b1 99%);
+}
+div.mTopic:nth-child(4) {
+	background-color: rgba(46,134,193,.99); background: linear-gradient(45deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);
+}
+div.mTopic:nth-child(5) {
+	background-color: rgba(40,180,99,.99); background: linear-gradient(45deg, #28b463, #2ecc71, #58d68d, #82e0aa 86%);
+}
+div.mTopic:nth-child(6) {
+	background-color: rgba(136,78,160,.99); background: linear-gradient(45deg, #884ea0, #9b59b6, #af7ac5, #c39bd3 86%);
+}
+div.mTopic:nth-child(7) {
+	background-color: rgba(46,64,83,.99); background: linear-gradient(45deg, #2e4053, #34495e, #5d6d7e, #85929e 86%);
+}
+div.mTopic:nth-child(8) {
+	background-color: rgba(186,74,0,.99); background: linear-gradient(45deg, #ba4a00, #d35400, #dc7633, #e59866 86%);
+}
+

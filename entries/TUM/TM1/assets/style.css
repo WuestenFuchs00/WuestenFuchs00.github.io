@@ -11,16 +11,9 @@ div#mHeaderTitle {
 div#mContent > h2 {
 	margin: 18px 6px; font-family: 'Montserrat', sans-serif; font-size: 30px;
 }
-div#mSection {
+div.mSection {
 	margin-top: 10px; padding: 1px 6px 10px 6px; font-family: 'Roboto';
 }
-div#mSection:nth-child(2n) {
+div.mSection:nth-child(2n) {
 	background-color: rgba(10,109,221,.2);
-}
-div#mSubsection {
-}
-div.mBilder {
-	background-image: url('../media/TM1_Uebung1_Aufg1.2.png');
-	background-repeat: no-repeat;
-	background-size: cover;
 }
