@@ -21,7 +21,7 @@
 		var imgWidth = o.getBoundingClientRect().width,
 			imgHeight = o.getBoundingClientRect().height;
 		// Calculate (new) image size, related to (current) window size
-		var offset = 5*6; // from css style, margin left/right, factor 5x
+		var offset = 6*6; // from css style, margin left/right, factor 5x
 		var windowSize = mGetWindowSize();
 		var newImgWidth = ( imgWidth > windowSize.width ) ? windowSize.width : imgWidth;
 		newImgWidth -= offset;
