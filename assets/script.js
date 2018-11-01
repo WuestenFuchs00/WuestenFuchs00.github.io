@@ -7,7 +7,7 @@ var mJS = (function () {
 		styleBoxes : [
 			"background: linear-gradient(45deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);", /* MouseOver */ 
 			"background: linear-gradient(45deg, #28b463, #2ecc71, #58d68d, #82e0aa 69%);", 
-			"background: linear-gradient(135deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);", 
+			"background: linear-gradient(45deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);", 
 			"background: linear-gradient(45deg, #d68910, #f39c12, #f5b041, #f8c471 86%);", 
 			"background: linear-gradient(45deg, #2e4053, #34495e, #5d6d7e, #85929e 86%);", 
 			"background: linear-gradient(45deg, #884ea0, #9b59b6, #af7ac5, #c39bd3 86%);", 
@@ -20,11 +20,23 @@ var mJS = (function () {
 			"background: linear-gradient(135deg, #2e4053, #34495e, #5d6d7e, #85929e 86%);",
 			"background: linear-gradient(135deg, #884ea0, #9b59b6, #af7ac5, #c39bd3 86%);",
 			"background: linear-gradient(135deg, #cb4335, #e74c3c, #ec7063, #f5b7b1 99%);", 
-			"background: linear-gradient(135deg, #ba4a00, #d35400, #dc7633, #e59866 86%);"],
+			"background: linear-gradient(135deg, #ba4a00, #d35400, #dc7633, #e59866 86%);"
+		],
 		urls : [
 			"entries/TUM/TM1/index.html", 
 			"entries/TUM/Chemie/index.html", "#", "#", "#", "#", "#", "#",
 		],
+		pianoNotes : [
+			"media/piano_note_pack/mp3/Do.mp3",
+			"media/piano_note_pack/mp3/Re.mp3",
+			"media/piano_note_pack/mp3/Mi.mp3",
+			"media/piano_note_pack/mp3/Fa.mp3",
+			"media/piano_note_pack/mp3/Sol.mp3",
+			"media/piano_note_pack/mp3/La.mp3",
+			"media/piano_note_pack/mp3/Si.mp3",
+			"media/piano_note_pack/mp3/Do_Octave.mp3",
+		],
+		piano : null,
 		boxes : [],
 		sectionOutput : null,
 	};
@@ -100,16 +112,19 @@ var mJS = (function () {
 						}
 					}
 				}, false);
-				// Add MouseClick listeners
+				// Add Click listeners
 				g.boxes[i].addEventListener("click", function (evt) {
 					for ( var k = 0; k < g.boxes.length; k++ ) {
 						if ( evt.target == g.boxes[k] ) {
-							g.sectionOutput.innerHTML = g.captions[k];							
+							g.sectionOutput.innerHTML = g.captions[k];
 							var mALink = document.createElement("A");
 							mALink.setAttribute("href", g.urls[k]);
 							mALink.setAttribute("style", "margin-left: 8px; padding: 10px; text-decoration: none; background-color: red; color: #fff;");
 							mALink.innerHTML = "Continue";
 							g.sectionOutput.appendChild(mALink);
+							// Play a piano note
+							g.piano = new Audio(g.pianoNotes[k]);
+							g.piano.play();
 							break;
 						}
 					}
