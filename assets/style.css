@@ -24,7 +24,7 @@ div.mSubsection:first-child {
 	padding-top: 10px;
 }
 div.mTopic {
-	height: 76px; width: 76px; overflow: hidden; background-color: rgba(231,76,60,.99); background-repeat: no-repeat; 
+	height: 78px; width: 78px; overflow: hidden; background-color: rgba(231,76,60,.99); background-repeat: no-repeat; 
 	margin: 0 10px 10px 0; float: left; box-shadow: 3px 3px 3px rgba(171,178,185,1); border-radius: 6px; 
 	background-color: rgba(231,76,60,.99); background: linear-gradient(45deg, #cb4335, #e74c3c, #ec7063 86%);
 }
