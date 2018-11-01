@@ -3,7 +3,26 @@
  */ 
 var mJS = (function () {
 	var g = {
-		boxes : []
+		captions : ["Technische Mechanik", "Chemie", "Physik", "Technische Elektrizitätslehre", "CAD", "", "", ""],
+		styleBoxes : [
+			"background: linear-gradient(45deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);", /* MouseOver */ 
+			"background: linear-gradient(45deg, #28b463, #2ecc71, #58d68d, #82e0aa 69%);", 
+			"background: linear-gradient(45deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);", 
+			"background: linear-gradient(45deg, #d68910, #f39c12, #f5b041, #f8c471 86%);", 
+			"background: linear-gradient(45deg, #2e4053, #34495e, #5d6d7e, #85929e 86%);", 
+			"background: linear-gradient(45deg, #884ea0, #9b59b6, #af7ac5, #c39bd3 86%);", 
+			"background: linear-gradient(45deg, #cb4335, #e74c3c, #ec7063, #f5b7b1 99%);", 
+			"background: linear-gradient(45deg, #ba4a00, #d35400, #dc7633, #e59866 86%);", 
+			"background: linear-gradient(135deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);", /* MouseOut */
+			"background: linear-gradient(135deg, #28b463, #2ecc71, #58d68d, #82e0aa 69%);", 
+			"background: linear-gradient(135deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);", 
+			"background: linear-gradient(135deg, #d68910, #f39c12, #f5b041, #f8c471 86%);", 
+			"background: linear-gradient(135deg, #2e4053, #34495e, #5d6d7e, #85929e 86%);",
+			"background: linear-gradient(135deg, #884ea0, #9b59b6, #af7ac5, #c39bd3 86%);",
+			"background: linear-gradient(135deg, #cb4335, #e74c3c, #ec7063, #f5b7b1 99%);", 
+			"background: linear-gradient(135deg, #ba4a00, #d35400, #dc7633, #e59866 86%);"],
+		boxes : [],
+		sectionOutput : null,
 	};
 	return {
 		/*
@@ -59,76 +78,29 @@ var mJS = (function () {
 			for ( var i = 0; i < g.boxes.length; i++ ) {
 				// Add MouseOver listeners
 				g.boxes[i].addEventListener("mouseover", function (evt) {
-					var mStyle = "cursor: pointer;"
+					var mStyle = "cursor: pointer;";
 					for ( var k = 0; k < g.boxes.length; k++ ) {
 						if ( evt.target == g.boxes[k] ) {
-							switch (k) {
-								case 0:
-									mStyle += "background: linear-gradient(45deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);";
-									break;
-								case 1:
-									mStyle += "background: linear-gradient(45deg, #28b463, #2ecc71, #58d68d, #82e0aa 69%);";
-									break;
-								case 2:
-									mStyle += "background: linear-gradient(45deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);";
-									break;
-								case 3:
-									mStyle += "background: linear-gradient(45deg, #d68910, #f39c12, #f5b041, #f8c471 86%);";
-									break;
-								case 4:
-									mStyle += "background: linear-gradient(45deg, #cb4335, #e74c3c, #ec7063, #f5b7b1 99%);";
-									break;
-								case 5:
-									mStyle += "background: linear-gradient(45deg, #884ea0, #9b59b6, #af7ac5, #c39bd3 86%);";
-									break;
-								case 6:
-									mStyle += "background: linear-gradient(135deg, #2e4053, #34495e, #5d6d7e, #85929e 86%);";
-									break;
-								case 7:
-									mStyle += "background: linear-gradient(45deg, #ba4a00, #d35400, #dc7633, #e59866 86%);";
-									break;
-								default:
-									break;
-							}
-							evt.target.setAttribute("style", mStyle);
+							evt.target.setAttribute("style", mStyle + g.styleBoxes[k]);
 							break;
 						}
 					}
 				}, false);
-				// Add MouseOver listeners
+				// Add MouseOut listeners
 				g.boxes[i].addEventListener("mouseout", function (evt) {
-					var mStyle = "cursor: auto;"
+					var mStyle = "cursor: auto;";
 					for ( var k = 0; k < g.boxes.length; k++ ) {
 						if ( evt.target == g.boxes[k] ) {
-							switch (k) {
-								case 0:
-									mStyle += "background: linear-gradient(135deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);";
-									break;
-								case 1:
-									mStyle += "background: linear-gradient(135deg, #28b463, #2ecc71, #58d68d, #82e0aa 69%);";
-									break;
-								case 2:
-									mStyle += "background: linear-gradient(135deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);";
-									break;
-								case 3:
-									mStyle += "background: linear-gradient(135deg, #d68910, #f39c12, #f5b041, #f8c471 86%);";
-									break;
-								case 4:
-									mStyle += "background: linear-gradient(135deg, #cb4335, #e74c3c, #ec7063, #f5b7b1 99%);";
-									break;
-								case 5:
-									mStyle += "background: linear-gradient(135deg, #884ea0, #9b59b6, #af7ac5, #c39bd3 86%);";
-									break;
-								case 6:
-									mStyle += "background: linear-gradient(135deg, #2e4053, #34495e, #5d6d7e, #85929e 86%);";
-									break;
-								case 7:
-									mStyle += "background: linear-gradient(135deg, #ba4a00, #d35400, #dc7633, #e59866 86%);";
-									break;
-								default:
-									break;
-							}
-							evt.target.setAttribute("style", mStyle);
+							evt.target.setAttribute("style", mStyle + g.styleBoxes[k+8]);
+							break;
+						}
+					}
+				}, false);
+				// Add MouseClick listeners
+				g.boxes[i].addEventListener("click", function (evt) {
+					for ( var k = 0; k < g.boxes.length; k++ ) {
+						if ( evt.target == g.boxes[k] ) {
+							g.sectionOutput.innerHTML = g.captions[k];
 							break;
 						}
 					}
@@ -139,8 +111,10 @@ var mJS = (function () {
 		 *
 		 */
 		mInit : function () {
-			g.boxes = document.querySelectorAll("div.mTopic") ? document.querySelectorAll("div.mTopic") : [];
-			if ( g.boxes.length <= 0 ) return; // Exit
+			g.boxes = ( document.querySelectorAll("div.mTopic") ) ? document.querySelectorAll("div.mTopic") : [];
+			g.sectionOutput = ( document.querySelectorAll("div.mSection") ) ? document.querySelectorAll("div.mSection")[1] : null;
+			if ( g.boxes.length <= 0 || !g.sectionOutput ) return; // Exit
+			g.sectionOutput.setAttribute("style", "padding: 6px 6px;");
 			this.mScaleBoxes();
 			this.mAddListenersBoxes();
 		}, // mInit

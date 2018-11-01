@@ -29,10 +29,10 @@ div.mTopic {
 	background-color: rgba(231,76,60,.99); background: linear-gradient(45deg, #cb4335, #e74c3c, #ec7063 86%);
 	transition: transform .8s; /* Animation */
 }
-div.mTopic:hover { transform: scale(1.15); /* 115% zoom */ }
 div.mTopic > div {
-	text-align: center; padding: 3px 0; background-color: rgba(80,80,80,.2); color: #fff; text-shadow: 1px 1px rgba(0,0,0,.6);
+	text-align: center; padding: 3px 0; background-color: rgba(30,30,30,.4); color: #fff; text-shadow: 1px 1px rgba(0,0,0,.6);
 }
+div.mTopic:hover { transform: scale(1.15); /* 115% zoom */ }
 div.mTopic:nth-child(1) {
 	background-color: rgba(241,196,15,.99); background: linear-gradient(135deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);
 }
@@ -46,13 +46,13 @@ div.mTopic:nth-child(4) {
 	background-color: rgba(214,137,16,.99); background: linear-gradient(135deg, #d68910, #f39c12, #f5b041, #f8c471 86%);
 }
 div.mTopic:nth-child(5) {
-	background-color: rgba(231,76,60,.99); background: linear-gradient(135deg, #cb4335, #e74c3c, #ec7063, #f5b7b1 99%);
+	background-color: rgba(46,64,83,.99); background: linear-gradient(135deg, #2e4053, #34495e, #5d6d7e, #85929e 86%);
 }
 div.mTopic:nth-child(6) {
 	background-color: rgba(136,78,160,.99); background: linear-gradient(135deg, #884ea0, #9b59b6, #af7ac5, #c39bd3 86%);
 }
 div.mTopic:nth-child(7) {
-	background-color: rgba(46,64,83,.99); background: linear-gradient(135deg, #2e4053, #34495e, #5d6d7e, #85929e 86%);
+	background-color: rgba(231,76,60,.99); background: linear-gradient(135deg, #cb4335, #e74c3c, #ec7063, #f5b7b1 99%);
 }
 div.mTopic:nth-child(8) {
 	background-color: rgba(186,74,0,.99); background: linear-gradient(135deg, #ba4a00, #d35400, #dc7633, #e59866 86%);
