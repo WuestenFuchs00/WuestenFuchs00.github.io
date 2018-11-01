@@ -34,13 +34,13 @@ div.mTopic > div {
 }
 div.mTopic:hover { transform: scale(1.15); /* 115% zoom */ }
 div.mTopic:nth-child(1) {
-	background-color: rgba(241,196,15,.99); background: linear-gradient(135deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);
+	background-color: rgba(241,196,15,.99); background: linear-gradient(135deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);
 }
 div.mTopic:nth-child(2) {
 	background-color: rgba(40,180,99,.99); background: linear-gradient(135deg, #28b463, #2ecc71, #58d68d, #82e0aa 69%);
 }
 div.mTopic:nth-child(3) {
-	background-color: rgba(46,134,193,.99); background: linear-gradient(135deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);
+	background-color: rgba(46,134,193,.99); background: linear-gradient(135deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);
 }
 div.mTopic:nth-child(4) {
 	background-color: rgba(214,137,16,.99); background: linear-gradient(135deg, #d68910, #f39c12, #f5b041, #f8c471 86%);

@@ -5,22 +5,26 @@ var mJS = (function () {
 	var g = {
 		captions : ["Technische Mechanik", "Chemie", "Physik", "Technische Elektrizitätslehre", "CAD", "", "", ""],
 		styleBoxes : [
-			"background: linear-gradient(45deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);", /* MouseOver */ 
+			"background: linear-gradient(45deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);", /* MouseOver */ 
 			"background: linear-gradient(45deg, #28b463, #2ecc71, #58d68d, #82e0aa 69%);", 
-			"background: linear-gradient(45deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);", 
+			"background: linear-gradient(135deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);", 
 			"background: linear-gradient(45deg, #d68910, #f39c12, #f5b041, #f8c471 86%);", 
 			"background: linear-gradient(45deg, #2e4053, #34495e, #5d6d7e, #85929e 86%);", 
 			"background: linear-gradient(45deg, #884ea0, #9b59b6, #af7ac5, #c39bd3 86%);", 
 			"background: linear-gradient(45deg, #cb4335, #e74c3c, #ec7063, #f5b7b1 99%);", 
 			"background: linear-gradient(45deg, #ba4a00, #d35400, #dc7633, #e59866 86%);", 
-			"background: linear-gradient(135deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);", /* MouseOut */
+			"background: linear-gradient(135deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);", /* MouseOut */
 			"background: linear-gradient(135deg, #28b463, #2ecc71, #58d68d, #82e0aa 69%);", 
-			"background: linear-gradient(135deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);", 
+			"background: linear-gradient(135deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);", 
 			"background: linear-gradient(135deg, #d68910, #f39c12, #f5b041, #f8c471 86%);", 
 			"background: linear-gradient(135deg, #2e4053, #34495e, #5d6d7e, #85929e 86%);",
 			"background: linear-gradient(135deg, #884ea0, #9b59b6, #af7ac5, #c39bd3 86%);",
 			"background: linear-gradient(135deg, #cb4335, #e74c3c, #ec7063, #f5b7b1 99%);", 
 			"background: linear-gradient(135deg, #ba4a00, #d35400, #dc7633, #e59866 86%);"],
+		urls : [
+			"entries/TUM/TM1/index.html", 
+			"entries/TUM/Chemie/index.html", "#", "#", "#", "#", "#", "#",
+		],
 		boxes : [],
 		sectionOutput : null,
 	};
@@ -100,7 +104,12 @@ var mJS = (function () {
 				g.boxes[i].addEventListener("click", function (evt) {
 					for ( var k = 0; k < g.boxes.length; k++ ) {
 						if ( evt.target == g.boxes[k] ) {
-							g.sectionOutput.innerHTML = g.captions[k];
+							g.sectionOutput.innerHTML = g.captions[k];							
+							var mALink = document.createElement("A");
+							mALink.setAttribute("href", g.urls[k]);
+							mALink.setAttribute("style", "margin-left: 8px; padding: 10px; text-decoration: none; background-color: red; color: #fff;");
+							mALink.innerHTML = "Continue";
+							g.sectionOutput.appendChild(mALink);
 							break;
 						}
 					}
@@ -114,7 +123,7 @@ var mJS = (function () {
 			g.boxes = ( document.querySelectorAll("div.mTopic") ) ? document.querySelectorAll("div.mTopic") : [];
 			g.sectionOutput = ( document.querySelectorAll("div.mSection") ) ? document.querySelectorAll("div.mSection")[1] : null;
 			if ( g.boxes.length <= 0 || !g.sectionOutput ) return; // Exit
-			g.sectionOutput.setAttribute("style", "padding: 6px 6px;");
+			g.sectionOutput.setAttribute("style", "padding: 6px 6px; font-size: 18px; font-family: 'Abel';");
 			this.mScaleBoxes();
 			this.mAddListenersBoxes();
 		}, // mInit
