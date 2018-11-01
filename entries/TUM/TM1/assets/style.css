@@ -19,3 +19,8 @@ div#mSection:nth-child(2n) {
 }
 div#mSubsection {
 }
+div.mBilder {
+	background-image: url('../media/TM1_Uebung1_Aufg1.2.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
