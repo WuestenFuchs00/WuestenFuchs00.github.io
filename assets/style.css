@@ -18,7 +18,7 @@ div.mSection:nth-child(2n) {
 	background-color: rgba(236,231,229,.9);
 }
 div.mSubsection {
-	margin-left: 6px;
+	margin-left: 6px; clear: left;
 }
 div.mSubsection:first-child {
 	padding-top: 10px;
@@ -33,19 +33,19 @@ div.mTopic > div {
 	text-align: center; padding: 3px 0; background-color: rgba(30,30,30,.4); color: #fff; text-shadow: 1px 1px rgba(0,0,0,.6);
 }
 div.mTopic:hover { transform: scale(1.15); /* 115% zoom */ }
-div.mTopic:nth-child(1) {
-	background-color: rgba(241,196,15,.99); background: linear-gradient(135deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);
+div.mTopic:nth-child(1) { /* TM */
+	background-color: rgba(46,134,193,.99); background: linear-gradient(135deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);
 }
-div.mTopic:nth-child(2) {
+div.mTopic:nth-child(2) { /* CHEM */
 	background-color: rgba(40,180,99,.99); background: linear-gradient(135deg, #28b463, #2ecc71, #58d68d, #82e0aa 69%);
 }
-div.mTopic:nth-child(3) {
-	background-color: rgba(46,134,193,.99); background: linear-gradient(135deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);
+div.mTopic:nth-child(3) { /* PHYS */
+	background-color: rgba(241,196,15,.99); background: linear-gradient(135deg, #f1c40f, #f4d03f, #f7dc6f, #f9e79f 60%);
 }
-div.mTopic:nth-child(4) {
+div.mTopic:nth-child(4) { /* TE */
 	background-color: rgba(214,137,16,.99); background: linear-gradient(135deg, #d68910, #f39c12, #f5b041, #f8c471 86%);
 }
-div.mTopic:nth-child(5) {
+div.mTopic:nth-child(5) { /* CAD */
 	background-color: rgba(46,64,83,.99); background: linear-gradient(135deg, #2e4053, #34495e, #5d6d7e, #85929e 86%);
 }
 div.mTopic:nth-child(6) {
@@ -57,3 +57,10 @@ div.mTopic:nth-child(7) {
 div.mTopic:nth-child(8) {
 	background-color: rgba(186,74,0,.99); background: linear-gradient(135deg, #ba4a00, #d35400, #dc7633, #e59866 86%);
 }
+div.mTopic_TM  > div, .mTopic_CHEM  > div, .mTopic_PHYS  > div  {
+	float: left; margin-left: 8px; margin-bottom: 8px; padding: 10px; text-decoration: none; color: #fff; 
+	text-shadow: 1px 1px rgba(0,0,0,.8); box-shadow: 2px 2px 4px rgba(20,30,20,.6);
+}
+div.mTopic_TM  > div { background-color: rgba(46,134,193,1); }
+div.mTopic_CHEM  > div { background-color: rgba(40,180,99,.99); }
+div.mTopic_PHYS  > div { background-color: rgba(241,196,15,.99); }
