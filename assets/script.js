@@ -116,15 +116,16 @@ var mJS = (function () {
 				g.boxes[i].addEventListener("click", function (evt) {
 					for ( var k = 0; k < g.boxes.length; k++ ) {
 						if ( evt.target == g.boxes[k] ) {
+							// Play a piano note
+							g.piano = new Audio(g.pianoNotes[k]);
+							g.piano.play();
+							// Insert information and animation
 							g.sectionOutput.innerHTML = g.captions[k];
 							var mALink = document.createElement("A");
 							mALink.setAttribute("href", g.urls[k]);
 							mALink.setAttribute("style", "margin-left: 8px; padding: 10px; text-decoration: none; background-color: red; color: #fff;");
 							mALink.innerHTML = "Continue";
 							g.sectionOutput.appendChild(mALink);
-							// Play a piano note
-							g.piano = new Audio(g.pianoNotes[k]);
-							g.piano.play();
 							break;
 						}
 					}
