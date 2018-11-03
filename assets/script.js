@@ -39,6 +39,7 @@ var mJS = (function () {
 		piano : null,
 		boxes : [],
 		sectionOutput : null,
+		volumeOn : true,
 	};
 	return {
 		/*
@@ -118,7 +119,7 @@ var mJS = (function () {
 						if ( evt.target == g.boxes[k] ) {
 							// Play a piano note
 							g.piano = new Audio(g.pianoNotes[k]);
-							g.piano.play();
+							if ( g.volumeOn ) g.piano.play();
 							// Insert information and animation
 							g.sectionOutput.innerHTML = g.captions[k];
 							var mALink = document.createElement("A");
