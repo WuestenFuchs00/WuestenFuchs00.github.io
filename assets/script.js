@@ -134,7 +134,19 @@ var mJS = (function () {
 		/*
 		 *
 		 */
-		mInit : function () {
+		mResizeScreen : function () {
+			var windowSize = this.mGetWindowSize();
+			var strStyle = "";
+			if ( windowSize.width > 820 )  {
+				strStyle = "width:" + (windowSize.width / 2) + "px;";
+			}
+			strStyle += "height:" + windowSize.height + "px;";
+			document.getElementById("mPage").setAttribute("style", strStyle);
+		}, // mResizeScreen
+		/*
+		 *
+		 */
+		mInit : function () {			
 			g.boxes = ( document.querySelectorAll("div.mTopic") ) ? document.querySelectorAll("div.mTopic") : [];
 			g.sections = ( document.querySelectorAll("div.mSection.mHide") ) ? document.querySelectorAll("div.mSection.mHide") : null;
 			if ( g.boxes.length <= 0 || !g.sections ) return; // Exit
@@ -157,10 +169,11 @@ var mJS = (function () {
 					g.speaker[2].setAttribute("style", "color: #000;");
 					g.speaker[2].innerHTML = "Mute";					 
 				}				
-			}, false);			
+			}, false);	
 			
 			this.mScaleBoxes();
 			this.mAddListenersBoxes();
+			this.mResizeScreen();
 		}, // mInit
 	}
 })();

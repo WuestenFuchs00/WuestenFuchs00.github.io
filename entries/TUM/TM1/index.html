@@ -46,11 +46,19 @@
 				</p>
 			</div>
 			<div class="mSubsection">
-				<b>Lösung</b>: Freischnitt der Walze mit allen wirkenden Kräften
+				<b>Lösung</b>: Freischnitt der Walze mit allen wirkenden Kräften:
 				<p><img src="media/TM1_Uebung1_Aufg1.2_b2.png" border="1" onload="mResizeImg(this);" /></p>
 				<ul style="list-style-type: none;">
 						<li>\( G = 500 N,\; F = 200 N \)</li>
 						<li style="color:red;">\( \alpha = 30°,\; \beta = 45°,\; \gamma = 60° \)</li>
+						<li>&nbsp;</li>
+						<li>
+							<form name="frm_TM1_Uebung1.2">
+								<p>Tool zum Rechnen von \( F_l \) und \( F_r \)</p>
+								<label>Kraft \( G \): &nbsp;<input type="text" placeholder="0" minlength="4" maxlength="8" size="8" /> N</label><br />
+								<label>Kraft \( F \): &nbsp;<input type="text" placeholder="0" minlength="4" maxlength="8" size="8" /> N</label>
+							</form>						
+						</li>
 				</ul>
 				<ol>
 					<li>
@@ -76,14 +84,32 @@
 							= \begin{bmatrix} 0 \\ -G \end{bmatrix}
 							+ F \cdot \begin{bmatrix} cos(\alpha) \\ -sin(\alpha) \end{bmatrix}
 							= \begin{bmatrix} F \cdot cos(\alpha) \\ -G - F\cdot sin(\alpha) \end{bmatrix}
-						\)</p>
+						\)
+							<span style="margin-left: 4px;color:red;">(1)</span>
+						</p>
 						Die Walze wird von den Kräften \( \vec F_{l} \) und \( \vec F_r \) aus der 
 						Führung angegriffen. Da alle Wirkungslinien der Kräfte sich in einem (gemeinsamen)
 						Punkt schneiden, kann die Resultierende \( \vec R \) auch in die zwei Kräfte
 						\( \vec F_{l} \) und \( \vec F_r \) zerlegt werden. Es gilt:
-						<p>
-							\( \vec R = \vec F_{l} + \vec F_r \)
+						<p>\( \vec R = \vec F_{l} + \vec F_r \)</p>
+						<p>\( \vec R = \begin{bmatrix} R_{x} \\ R_{y} \end{bmatrix}
+							= \begin{bmatrix} 
+								F_l \cdot cos(\beta) - F_r \cdot cos(\gamma) \\
+								F_l \cdot sin(\beta) - F_r \cdot sin(\gamma)
+							  \end{bmatrix}
+						\)
+							<span style="margin-left: 4px;color:red;">(2)</span>
 						</p>
+						Von der Gleichung (1) und (2) erhält man das Gleichungssystem:
+						<p><b>I.&nbsp;</b> \( R_x = F \cdot cos(\alpha) = F_l \cdot cos(\beta) - F_r \cdot cos(\gamma) \)</p>
+						<p><b>II.&nbsp;</b> \( R_y = -G - F \cdot sin(\alpha) = F_l \cdot sin(\beta) - F_r \cdot sin(\gamma) \)</p>
+						bzw.
+						<p><b>I.&nbsp;</b> \( F \cdot cos(\alpha) = F_l \cdot cos(\beta) - F_r \cdot cos(\gamma) \)</p>
+						<p><b>II.&nbsp;</b> \( -G - F \cdot sin(\alpha) = F_l \cdot sin(\beta) - F_r \cdot sin(\gamma) \)</p>
+						Man löst die Gleichung <b>I.</b> nach \( F_r \) auf und erhält:
+						<p style="color:red;">$$  F_r = \frac{F_l \cdot cos(\beta) - F \cdot cos(\alpha)}{cos(\gamma)} $$</p>
+						Man setzt die obige Formel für \( F_r \) in Gleichung <b>II.</b> ein und löst nach \( F_l \) auf:
+						<p style="color:red;">$$ F_l = -\left( \frac{F \cdot \left( sin(\alpha) - \frac{sin(\gamma)}{cos(\gamma)} \cdot cos(\alpha) \right) + G}{sin(\beta) + \frac{sin(\gamma)}{cos(\gamma)} \cdot cos(\beta)} \right) $$</p>
 					</li>
 					<li>
 					</li>
@@ -91,7 +117,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="mFooter" onload="mResizeScreenSize"></div>
+	<div id="mFooter"></div>
 </div>
 </body>
 </html>
