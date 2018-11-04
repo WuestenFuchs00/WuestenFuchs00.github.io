@@ -132,16 +132,40 @@ var mJS = (function () {
 			}
 		}, // mAddListenersBoxes
 		/*
-		 *
-		 */
+		* Searches in all nodes and their children for the max height value (scrollHeight, clientHeight).
+		*/
+		mGetMaxHeight : function (rootNode, startHeight) {		
+			var mHeight = 0;		
+			for ( var i = rootNode.childNodes.length-1; i >= 0; i-- ) {
+				var node = rootNode.childNodes[i];
+				if ( node.scrollHeight && node.clientHeight ) {
+					var nodeHeight = Math.max(node.scrollHeight, node.clientHeight);
+					// Update mHeight
+					mHeight = Math.max(nodeHeight, startHeight);
+				}
+				// Recursion
+				if ( node.childNodes.length ) mHeight = Math.max(mHeight, this.mGetMaxHeight(node, mHeight));
+			}
+			return mHeight;
+		}, // mGetMaxHeight
+		/*
+		* Returns the max page height
+		*/
+		mGetPageHeight : function () {
+			var mRoot = document.documentElement || document.body;
+			return this.mGetMaxHeight(mRoot, 0);
+		}, // mGetPageHeight
+		/*
+		* Resize screen 
+		*/
 		mResizeScreen : function () {
 			var windowSize = this.mGetWindowSize();
 			var strStyle = "";
-			if ( windowSize.width > 820 )  {
-				strStyle = "width:" + (windowSize.width / 2) + "px;";
+			if ( windowSize.width > 820 ) {
+				strStyle = "box-shadow: 0 0 4px rgba(30,30,30,.6); width:" + (windowSize.width / 2) + "px;";
 			}
-			strStyle += "height:" + windowSize.height + "px;";
-			document.getElementById("mPage").setAttribute("style", strStyle);
+			strStyle += "height:" + this.mGetPageHeight()*2 + "px;";
+			document.getElementById("mPage").setAttribute("style", strStyle);		
 		}, // mResizeScreen
 		/*
 		 *

@@ -44,19 +44,28 @@
 						<li>Auf welchen Wert darf \( F \) höchstens anwachsen, wenn die Walze nicht aus der Führung gedrückt werden soll?</li>
 					</ol>
 				</p>
-			</div>
+			</div>α β γ
 			<div class="mSubsection">
 				<b>Lösung</b>: Freischnitt der Walze mit allen wirkenden Kräften:
-				<p><img src="media/TM1_Uebung1_Aufg1.2_b2.png" border="1" onload="mResizeImg(this);" /></p>
+				<p><img src="media/TM1_Uebung1_Aufg1.2_b3.png" border="1" onload="mResizeImg(this);" /></p>
 				<ul style="list-style-type: none;">
 						<li>\( G = 500 N,\; F = 200 N \)</li>
 						<li style="color:red;">\( \alpha = 30°,\; \beta = 45°,\; \gamma = 60° \)</li>
 						<li>&nbsp;</li>
 						<li>
-							<form name="frm_TM1_Uebung1.2">
-								<p>Tool zum Rechnen von \( F_l \) und \( F_r \)</p>
-								<label>Kraft \( G \): &nbsp;<input type="text" placeholder="0" minlength="4" maxlength="8" size="8" /> N</label><br />
-								<label>Kraft \( F \): &nbsp;<input type="text" placeholder="0" minlength="4" maxlength="8" size="8" /> N</label>
+							<form id="frm_TM1_Uebung1_2" name="frm_TM1_Uebung1_2" style="width: 260px; background-color: rgba(80,80,80,.2); padding: 1px 8px 8px 8px;">
+								<p>Tool zum Rechnen von \( F_l \) und \( F_r \):</p>
+								<label>\( G \) : &nbsp;</label><input name="frm_TM1_Uebung1_2_G" class="mTextRight" type="text" value="500" minlength="4" maxlength="8" size="8" /> N
+								<input class="mButton" type="button" value="Reset" onclick="mTools().uebung1_2().reset()" /><br />
+								<label>\( F \) : &nbsp;</label><input name="frm_TM1_Uebung1_2_F" class="mTextRight" type="text" value="200" minlength="4" maxlength="8" size="8" /> N
+								<input class="mButton" type="button" value="Löschen" onclick="mTools().uebung1_2().clear()" /><p></p>
+								<label>\( \alpha \) : &nbsp;</label><input name="frm_TM1_Uebung1_2_a" class="mTextRight" type="text" value="30" minlength="4" maxlength="8" size="8" /> ° &nbsp;
+								<input class="mButton" type="button" value="Rechnen" onclick= "mTools().uebung1_2().calc()" /><br />
+								<label>\( \beta \) : &nbsp;</label><input name="frm_TM1_Uebung1_2_b" class="mTextRight" type="text" value="45" minlength="4" maxlength="8" size="8" /> ° &nbsp;<br />
+								<label>\( \gamma \) : &nbsp;</label><input name="frm_TM1_Uebung1_2_c" class="mTextRight" type="text" value="60" minlength="4" maxlength="8" size="8" /> ° &nbsp;<br />
+								<hr />
+								<label>\( F_l \) : &nbsp;</label><input name="frm_TM1_Uebung1_2_Fl" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> N<br />
+								<label>\( F_r \) : &nbsp;</label><input name="frm_TM1_Uebung1_2_Fr" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> N
 							</form>						
 						</li>
 				</ul>
@@ -110,6 +119,16 @@
 						<p style="color:red;">$$  F_r = \frac{F_l \cdot cos(\beta) - F \cdot cos(\alpha)}{cos(\gamma)} $$</p>
 						Man setzt die obige Formel für \( F_r \) in Gleichung <b>II.</b> ein und löst nach \( F_l \) auf:
 						<p style="color:red;">$$ F_l = -\left( \frac{F \cdot \left( sin(\alpha) - \frac{sin(\gamma)}{cos(\gamma)} \cdot cos(\alpha) \right) + G}{sin(\beta) + \frac{sin(\gamma)}{cos(\gamma)} \cdot cos(\beta)} \right) $$</p>
+						Man merkt anhand des Minuszeichens von \( F_l \), dass es negativ ist. Der Grund ist, dass wir
+						in unserer Freischnittskizze die Richtung von \( F_l \) nach oben rechts gewählt haben. In der 
+						Wirklichkeit zeigt \( F_l \) nach links unten auf die linke Führung, also in entgegengesetzte Richtung.
+						Der Betrag \( | F_l | \) bleibt immer gleich:
+						<p style="color:red;">$$ |F_l| = +\left( \frac{F \cdot \left( sin(\alpha) - \frac{sin(\gamma)}{cos(\gamma)} \cdot cos(\alpha) \right) + G}{sin(\beta) + \frac{sin(\gamma)}{cos(\gamma)} \cdot cos(\beta)} \right) $$</p>
+						Dasselbe gilt auch für \( F_r \). Somit zeigt \( F_r \) in wirklichkeit nach rechts unten auf die rechte
+						Führung. Es gilt:
+						<p style="color:red;">$$ F_r = -\left( F \cdot \frac{cos(\alpha)}{cos(\gamma)} + |F_l| \cdot \frac{cos(\beta)}{cos(\gamma)} \right) $$</p>
+						Und der Betrag \( |F_r| \) ist:
+						<p style="color:red;">$$ |F_r| = +\left( F \cdot \frac{cos(\alpha)}{cos(\gamma)} + |F_l| \cdot \frac{cos(\beta)}{cos(\gamma)} \right) $$</p>
 					</li>
 					<li>
 					</li>

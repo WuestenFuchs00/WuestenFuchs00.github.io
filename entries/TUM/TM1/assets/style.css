@@ -16,3 +16,6 @@ div.mSection {
 div.mSection:nth-child(2n) {
 	background-color: rgba(10,109,221,.2);
 }
+form input.mTextRight { text-align: right; }
+form input.mTextRight.readOnly { background-color: rgba(80,80,80,.1); }
+form input.mButton { margin-left: 20px; height: 24px; width: 80px; }
