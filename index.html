@@ -14,7 +14,9 @@
 <body>
 <div id="mPage">
 	<div id="mHeader">
-		<div id="mHeaderTitle">WELCOME</div>
+		<div id="mHeaderTitle"">
+			<span onclick="mForward('index.html')">WELCOME</span>
+		</div>
 	</div>
 	<div id="mContent">
 		<p>Choose one of the following boxes (topics) to continue.</p>
@@ -32,38 +34,38 @@
 		</div>
 		<div class="mSection">
 			<div class="mSubsection">
-				<span class="mInLineMiddle">Volume &nbsp;<b>ON</b>&nbsp;</span>
 				<!-- Use <label> to exploit the toggle effect -->
 				<label class="mSlider">
-					<input type="checkbox" />
+					<input id="mSpeakerSlider" type="checkbox" />
 					<span class="mSliderToggle mRound" />
 				</label>
-				<span class="mInLineMiddle">&nbsp;<b>OFF</b>&nbsp;</span>
+				<img id="mSpeakerIcon" src="media/speaker/volume-mute-silence_48.png" />
+				<span id="mSpeakerStatus">Mute</span>
 			</div>
 		</div>
-		<div class="mSection">
-			<div class="mSubsection mTopic_TM">
+		<div class="mSection mHide">
+			<div class="mSubsection mTopic_X mTopic_TM">
 				<b>Technische Mechanik</b> ist ein Teilgebiet der Mechanik und befasst sich mit
 				der Berechnung der auf die bzw. in den Körpern wirkenden Kräften.
 				<p></p>
 				<div>TM-Tools</div>
 				<div>TM-Theory</div>
-				<div>TM-Exercises</div>
+				<div onclick="mForward('entries/TUM/TM1/index.html')">TM-Exercises</div>
 				<!-- workaround for setting height -->
 				<p>&nbsp;</p>&nbsp;
 			</div>
 		</div>
-		<div class="mSection">
-			<div class="mSubsection mTopic_CHEM">
-				<div>CHEM-Tools</div>
+		<div class="mSection mHide">
+			<div class="mSubsection mTopic_X mTopic_CHEM">
+				<div onclick="mForward('entries/TUM/Chemie/index.html')">CHEM-Tools</div>
 				<div>CHEM-Theory</div>
 				<div>CHEM-Exercises</div>
 				<!-- workaround for setting height -->
 				<p>&nbsp;</p>&nbsp;
 			</div>
 		</div>
-		<div class="mSection">
-			<div class="mSubsection mTopic_PHYS">
+		<div class="mSection mHide">
+			<div class="mSubsection mTopic_X mTopic_PHYS">
 				<div>PHYS-Tools</div>
 				<div>PHYS-Theory</div>
 				<div>PHYS-Exercises</div>

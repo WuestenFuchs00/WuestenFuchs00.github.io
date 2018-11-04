@@ -1,28 +1,22 @@
 /**
  * style.css
  */
-html, body {
-	width: 100%; margin: 0; padding:0;
-}
+html, body { width: 100%; margin: 0; padding:0; }
+
 div#mHeaderTitle {
 	padding: 10px 6px; background-color: rgba(88,24,69,.99); color: #fff; font-family: 'Notable', sans-serif;
 	font-size: 32px; font-weight: bold; box-shadow: 2px 3px 4px #696969;
 }
-div#mContent > p {
-	margin: 18px 6px; font-family: 'Abel', sans-serif; font-size: 20px;
-}
-div.mSection {
-	margin-top: 10px; font-family: 'Roboto'; /* padding: 1px 6px 0px 6px; */
-}
-div.mSection:nth-child(2n) {
-	background-color: rgba(236,231,229,.9);
-}
-div.mSubsection {
-	margin-left: 6px; clear: left;
-}
-div.mSubsection:first-child {
-	padding-top: 10px;
-}
+div#mHeaderTitle > span { cursor: pointer; }
+div#mContent > p { margin: 18px 6px; font-family: 'Abel', sans-serif; font-size: 20px; }
+div.mSection { margin-top: 10px; font-family: 'Roboto'; /* padding: 1px 6px 0px 6px; */ }
+div.mSection:nth-child(2n) { background-color: rgba(236,231,229,.9); }
+div.mSection.mHide { display: none; visibility: hidden; }
+
+div.mSubsection { margin-left: 6px; clear: left; }
+div.mSubsection:first-child { padding-top: 10px; }
+div.mSubsection:nth-child(1) { padding-bottom: 14px; } /* second child */
+
 div.mTopic {
 	height: 80px; width: 80px; overflow: hidden; background-color: rgba(231,76,60,.99); background-repeat: no-repeat; 
 	margin: 0 10px 10px 0; float: left; box-shadow: 3px 3px 3px rgba(171,178,185,1); border-radius: 6px; 
@@ -57,16 +51,17 @@ div.mTopic:nth-child(7) {
 div.mTopic:nth-child(8) {
 	background-color: rgba(186,74,0,.99); background: linear-gradient(135deg, #ba4a00, #d35400, #dc7633, #e59866 86%);
 }
-div.mTopic_TM  > div, .mTopic_CHEM  > div, .mTopic_PHYS  > div  {
+div.mTopic_X > div  {
 	float: left; margin-left: 8px; margin-bottom: 8px; padding: 10px; text-decoration: none; color: #fff; 
-	text-shadow: 1px 1px rgba(0,0,0,.8); box-shadow: 2px 2px 4px rgba(20,30,20,.6);
+	text-shadow: 1px 1px rgba(30,30,30,.8); box-shadow: 2px 2px 4px rgba(20,30,20,.6); cursor: pointer;
 }
 div.mTopic_TM  > div { background-color: rgba(46,134,193,1); }
 div.mTopic_CHEM  > div { background-color: rgba(40,180,99,.99); }
 div.mTopic_PHYS  > div { background-color: rgba(241,196,15,.99); }
 
-/* Display Inline-block, vertical-align: middle */
-.mInLineMiddle { display: inline-block; vertical-align: middle; }
+/* Display speaker icon and status */
+#mSpeakerIcon { margin: 0 20px 0 30px; vertical-align: middle; }
+#mSpeakerIcon + span { /* display: inline-block; */ vertical-align: middle; font-family: 'Abel', sans-serif; font-size: 21px; }
 
 /* Slider Toggle */
 label.mSlider { 
@@ -83,7 +78,7 @@ span.mSliderToggle:before {
 	position: absolute; top: 4px; left: 4px; height: 26px; width: 26px; background-color: #fff;
 	transition: .4s; content: "";
 }
-label.mSlider input:checked + span.mSliderToggle { background-color: rgba(165,105,189,.8); }
+label.mSlider input:checked + span.mSliderToggle { background-color: rgba( 247,43,32,.8); }
 label.mSlider input:checked + span.mSliderToggle:before { transform: translateX(33px); }
 label.mSlider input:focus + span.mSliderToggle { box-shadow: 0 0 10px rgba(50,50,50,.6); }
 

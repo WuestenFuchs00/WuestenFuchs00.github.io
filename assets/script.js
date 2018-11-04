@@ -22,10 +22,6 @@ var mJS = (function () {
 			"background: linear-gradient(135deg, #cb4335, #e74c3c, #ec7063, #f5b7b1 99%);", 
 			"background: linear-gradient(135deg, #ba4a00, #d35400, #dc7633, #e59866 86%);"
 		],
-		urls : [
-			"entries/TUM/TM1/index.html", 
-			"entries/TUM/Chemie/index.html", "#", "#", "#", "#", "#", "#",
-		],
 		pianoNotes : [
 			"media/piano_note_pack/mp3/Do.mp3",
 			"media/piano_note_pack/mp3/Re.mp3",
@@ -37,9 +33,10 @@ var mJS = (function () {
 			"media/piano_note_pack/mp3/Do_Octave.mp3",
 		],
 		piano : null,
-		boxes : [],
-		sectionOutput : null,
-		volumeOn : true,
+		boxes : [], /* mTopic boxes */
+		sections : null, /* mSection blocks */
+		speaker : [null,null,null], /* [slider, speakerIcon, speakerStatus] */
+		speakerOn : false,
 	};
 	return {
 		/*
@@ -115,19 +112,20 @@ var mJS = (function () {
 				}, false);
 				// Add Click listeners
 				g.boxes[i].addEventListener("click", function (evt) {
-					for ( var k = 0; k < g.boxes.length; k++ ) {
+					for ( var k = 0; k < g.boxes.length; k++ ) {					
 						if ( evt.target == g.boxes[k] ) {
 							// Play a piano note
 							g.piano = new Audio(g.pianoNotes[k]);
-							if ( g.volumeOn ) g.piano.play();
-							// Insert information and animation
-							g.sectionOutput.innerHTML = g.captions[k];
-							var mALink = document.createElement("A");
-							mALink.setAttribute("href", g.urls[k]);
-							mALink.setAttribute("style", "margin-left: 8px; padding: 10px; text-decoration: none; background-color: red; color: #fff;");
-							mALink.innerHTML = "Continue";
-							g.sectionOutput.appendChild(mALink);
-							break;
+							if ( g.speakerOn ) g.piano.play();
+							// Display (sub)section content
+							if ( k >= g.sections.length ) break;
+							g.sections[k].setAttribute("class", "mSection");
+							g.sections[k].setAttribute("style", "background-color: rgba(236,231,229,.9);");							
+						}
+						else {
+							// Hide (sub)section content
+							if ( k >= g.sections.length ) break;
+							g.sections[k].setAttribute("class", "mSection mHide");
 						}
 					}
 				}, false);
@@ -138,9 +136,29 @@ var mJS = (function () {
 		 */
 		mInit : function () {
 			g.boxes = ( document.querySelectorAll("div.mTopic") ) ? document.querySelectorAll("div.mTopic") : [];
-			g.sectionOutput = ( document.querySelectorAll("div.mSection") ) ? document.querySelectorAll("div.mSection")[1] : null;
-			if ( g.boxes.length <= 0 || !g.sectionOutput ) return; // Exit
-			g.sectionOutput.setAttribute("style", "padding: 6px 6px; font-size: 18px; font-family: 'Abel';");
+			g.sections = ( document.querySelectorAll("div.mSection.mHide") ) ? document.querySelectorAll("div.mSection.mHide") : null;
+			if ( g.boxes.length <= 0 || !g.sections ) return; // Exit
+			
+			// Create speaker control
+			g.speaker[0] = ( document.getElementById("mSpeakerSlider") ) ? document.getElementById("mSpeakerSlider") : null;
+			g.speaker[1] = ( document.getElementById("mSpeakerIcon") ) ? document.getElementById("mSpeakerIcon") : null;
+			g.speaker[2] = ( document.getElementById("mSpeakerStatus") ) ? document.getElementById("mSpeakerStatus") : null;			
+			if ( g.speaker[0] == null ) return; // Exit
+			
+			// Configure speaker control
+			g.speaker[0].addEventListener("click", function (evt) {
+				g.speakerOn = evt.target.checked;
+				if ( g.speakerOn ) {
+					g.speaker[1].src = "media/speaker/volume-max-speaker_48.png";
+					g.speaker[2].setAttribute("style", "color: rgba( 247,43,32,.8);");
+					g.speaker[2].innerHTML = "Active";
+				} else {
+					g.speaker[1].src = "media/speaker/volume-mute-silence_48.png";
+					g.speaker[2].setAttribute("style", "color: #000;");
+					g.speaker[2].innerHTML = "Mute";					 
+				}				
+			}, false);			
+			
 			this.mScaleBoxes();
 			this.mAddListenersBoxes();
 		}, // mInit
@@ -149,3 +167,10 @@ var mJS = (function () {
 
 // document.addEventListener("DOMContentLoaded", () => mJS.mScaleBoxes(), false);
 document.addEventListener("DOMContentLoaded", function () { mJS.mInit(); }, false);
+
+/*
+ * Forward to new page with <strURL>
+ */
+function mForward (strURL) {
+	window.location.href = strURL;
+}
