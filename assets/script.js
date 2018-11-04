@@ -118,13 +118,13 @@ var mJS = (function () {
 							g.piano = new Audio(g.pianoNotes[k]);
 							if ( g.speakerOn ) g.piano.play();
 							// Display (sub)section content
-							if ( k >= g.sections.length ) break;
+							if ( k >= g.sections.length ) continue;
 							g.sections[k].setAttribute("class", "mSection");
 							g.sections[k].setAttribute("style", "background-color: rgba(236,231,229,.9);");							
 						}
 						else {
 							// Hide (sub)section content
-							if ( k >= g.sections.length ) break;
+							if ( k >= g.sections.length ) continue;
 							g.sections[k].setAttribute("class", "mSection mHide");
 						}
 					}
