@@ -31,11 +31,67 @@
 		<div class="mSection">
 			<div class="mSubsection">
 				<p><b>Aufgabe 1.2</b></p>
-				<img src="media/TM1_Uebung1_Aufg1.2.png" onload="mResizeImg(this);" />
+				<img src="media/TM1_Uebung1_Aufg1.2.png" border="1" onload="mResizeImg(this);" />
+				<p><b>Gegeben</b>:
+					<ul style="list-style-type: none;">
+						<li>\( G = 500 N,\; F = 200 N \)</li>
+						<li>\( \alpha = 30°,\; \beta = 45°,\; \gamma = 60° \)</li>
+					</ul>
+				</p>
+				<p><b>Gesucht</b>:
+					<ol>
+						<li>Welche Kräfte (\( F_l,\; F_r\))werden von der Walze auf die Führung übertragen?</li>
+						<li>Auf welchen Wert darf \( F \) höchstens anwachsen, wenn die Walze nicht aus der Führung gedrückt werden soll?</li>
+					</ol>
+				</p>
+			</div>
+			<div class="mSubsection">
+				<b>Lösung</b>: Freischnitt der Walze mit allen wirkenden Kräften
+				<p><img src="media/TM1_Uebung1_Aufg1.2_b2.png" border="1" onload="mResizeImg(this);" /></p>
+				<ul style="list-style-type: none;">
+						<li>\( G = 500 N,\; F = 200 N \)</li>
+						<li style="color:red;">\( \alpha = 30°,\; \beta = 45°,\; \gamma = 60° \)</li>
+				</ul>
+				<ol>
+					<li>
+						Bezeichnet \( F_l \) als die von der linken Fürhung wirkende Kraft, \( F_r \) als die
+						von der rechten Führung wirkenden Kraft.<br />
+						Die Vektoren der Kräfte \( G,\, F, \, F_l, F_r \) sind:
+						<p>\( \vec G = \begin{bmatrix} G_x \\ G_y \end{bmatrix}
+							= \begin{bmatrix} 0 \\ -G \end{bmatrix}
+						\)</p>
+						<p>\( \vec F = \begin{bmatrix} F_x \\ F_y \end{bmatrix}
+							= F \cdot \begin{bmatrix} cos(\alpha) \\ -sin(\alpha) \end{bmatrix}
+						\)</p>
+						<p>\( \vec F_l = \begin{bmatrix} F_{lx} \\ F_{ly} \end{bmatrix}
+							= F_{l} \cdot \begin{bmatrix} cos(\beta) \\ sin(\beta) \end{bmatrix}
+						\)</p>
+						<p>\( \vec F_r = \begin{bmatrix} F_{rx} \\ F_{ry} \end{bmatrix}
+							= F_{r} \cdot \begin{bmatrix} -cos(\gamma) \\ sin(\gamma) \end{bmatrix}
+						\)</p>
+						Die Kraftvektoren \( \vec G \) und \( \vec F \) können zu der Resultierenden
+						\( \vec R \) zusammengefasst werden:
+						<p>\( \vec R = \vec G + \vec F \)<p>
+						<p>\( \vec R = \begin{bmatrix} R_{x} \\ R_{y} \end{bmatrix}
+							= \begin{bmatrix} 0 \\ -G \end{bmatrix}
+							+ F \cdot \begin{bmatrix} cos(\alpha) \\ -sin(\alpha) \end{bmatrix}
+							= \begin{bmatrix} F \cdot cos(\alpha) \\ -G - F\cdot sin(\alpha) \end{bmatrix}
+						\)</p>
+						Die Walze wird von den Kräften \( \vec F_{l} \) und \( \vec F_r \) aus der 
+						Führung angegriffen. Da alle Wirkungslinien der Kräfte sich in einem (gemeinsamen)
+						Punkt schneiden, kann die Resultierende \( \vec R \) auch in die zwei Kräfte
+						\( \vec F_{l} \) und \( \vec F_r \) zerlegt werden. Es gilt:
+						<p>
+							\( \vec R = \vec F_{l} + \vec F_r \)
+						</p>
+					</li>
+					<li>
+					</li>
+				</ol>
 			</div>
 		</div>
 	</div>
-	<div id="mFooter"></div>
+	<div id="mFooter" onload="mResizeScreenSize"></div>
 </div>
 </body>
 </html>

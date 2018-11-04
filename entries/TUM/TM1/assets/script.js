@@ -4,7 +4,7 @@
 <!--
 	/*
 	 * Provides the current window size. If the window is resized by the user,
-	 * this function also returns the updated window size.
+	 * this function also returns the updated window/screen size.
 	 */
 	function mGetWindowSize() {
 		var w = window, b = document.body, e = document.documentElement
@@ -14,7 +14,7 @@
 	}
 	
 	/*
-	 * Adjust the (recently loaded) image to fit to the new window size.
+	 * Adjust the (recently loaded) image to fit to the new window/screen size.
 	 */
 	function mResizeImg(o) {
 		// Get image size
@@ -30,4 +30,21 @@
 		o.setAttribute("style","width:" + newImgWidth + "px");
 		o.setAttribute("style","height:" + newImgHeight + "px");
 	}
+
+	/*
+	 * Resize screen width
+	 */
+	function mResizeScreenSize() {
+		// Get screen width
+		var o = document.getElementById("mPage");
+		var windowW = mGetWindowSize().width;
+		console.log("screen width: " + windowW + ", o: " + o);
+		if ( windowW > 820 )  {
+			o.setAttribute("style", "width:" + (windowW / 2) + "px;");
+		}
+	}
+	
+document.addEventListener("DOMContentLoaded", function () {
+	mResizeScreenSize();
+}, false);
 -->
