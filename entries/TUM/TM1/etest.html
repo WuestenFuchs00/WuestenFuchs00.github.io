@@ -23,10 +23,10 @@
 				<p><b>E-Test 1</b></p>
 				<p><a href="media/TM1_ETest_1.png" target="_blank"><img src="media/TM1_ETest_1b.png" onload="mResizeImg(this);" border="1" /></a></p>
 				Gegeben ist das obige ebene Tragwerk. Berechnen Sie die horizontale Lagerkraft am 
-				Auflager \( A \) in der Einheit \( kN \) für \( F = 80 kN \), \( \alpha = 21° \) und 
+				Auflager \( A \) in der Einheit \( kN \) für \( F = 80 \, kN \), \( \alpha = 21° \) und 
 				\( r = 4m \). Die gesuchte Auflagerkraft ist dabei nach rechts positiv anzusetzen.
 				<p>Gegebene Grö&szlig;en:</p>
-				Belastung: \( F = 80 kN \)<br />
+				Belastung: \( F = 80 \, kN \)<br />
 				Geometrie: \( \alpha = 21°,\; r = 4m \)
 				<p>
 				Wichtig für die Berechnung: Rechnen Sie mit mindestens drei Nachkommastellen und runden Sie das 
@@ -40,6 +40,19 @@
 		<div class="mSection">
 			<div class="mSubsection">
 				<b>Lösung:</b>
+				<p>
+					<form id="frm_TM1_ETest_1" name="frm_TM1_ETest_1" style="width: 300px; background-color: rgba(80,80,80,.2); padding: 1px 8px 8px 8px;">
+						<p>Tool zum Rechnen der horizontalen Auflagerkraft \( A_x \):</p>
+						<label>\( F \) : &nbsp;</label><input name="frm_TM1_ETest_1_F" class="mTextRight" type="text" value="80" minlength="4" maxlength="8" size="8" /> kN
+						<input class="mButton" type="button" value="Reset" onclick="mTools().etest1().reset()" /><br />
+						<label>\( \alpha \) : &nbsp;</label><input name="frm_TM1_ETest_1_a" class="mTextRight" type="text" value="21" minlength="4" maxlength="8" size="8" /> °&nbsp;&nbsp;&nbsp;&nbsp;
+						<input class="mButton" type="button" value="Löschen" onclick="mTools().clear(this)" /><p></p>
+						<label>\( r \) : &nbsp;</label><input name="frm_TM1_ETest_1_r" class="mTextRight" type="text" value="4" minlength="4" maxlength="8" size="8" /> m &nbsp;
+						<input class="mButton" type="button" value="Rechnen" onclick= "mTools().etest1().calc()" /><br />
+						<hr />
+						<label>\( A_x \) : &nbsp;</label><input name="frm_TM1_ETest_1_Ax" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> kN
+					</form>	
+				</p>
 				<p>Wir bezeichnen das Gelenk als <span style="color:red;">\( G \)</span> (<i>vgl. Bild unten</i>).</p>
 				<img src="media/TM1_ETest_1c.png" onload="mResizeImg(this);" border="1" />
 				<p>Das Gelenk \( G \) ist ein Verbindungsstück, das den linken Tragwerksteil mit dem
@@ -67,15 +80,30 @@
 				<span style="color:red;">\( \Rightarrow\; B_y = 0 \)</span><p></p>
 				\( \begin{matrix} \curvearrowleft & \\ B :& 0 = r \cdot G_y \end{matrix} \)<br />
 				<span style="color:red;">\( \Rightarrow\; G_y = 0 \)</span><p></p>
-				Betrachten wir wieder die Skizze A des linken Tragwerksteils. Es gelten folgende 
-				(Momenten)Gleichgewichtsgleichungen:<p></p>
+				Betrachten wir noch mal die Skizze A des linken Tragwerksteils. Es gelten folgende 
+				(Momenten)Gleichgewichtsgleichungen:
+				<p><img src="media/TM1_ETest_1c_links_3.png" onload="mResizeImg(this);" border="1" /></p>
 				\( \begin{align}
 					\uparrow \; : \; 0  & = A_y - F_y + F + G_y \\
-										& = A_y - F_y + F + 0 = A_y - F_y + F \\
-										& = A_y - F \cdot sin(\alpha) + F = A_y + (1-sin(\alpha)) \cdot F
+										& = A_y - F_y + F + 0 \\ 
+										& = A_y - F_y + F \\
+										& = A_y - F \cdot sin(\alpha) + F \\ 
+										& = A_y + (1-sin(\alpha)) \cdot F
 				\end{align} \)<br />
 				<span style="color:red;">\( \Rightarrow \; A_y = (sin(\alpha)-1)\cdot F\)</span><p></p>
-				
+				\( \begin{array}{ll}
+					\curvearrowleft & \\ 
+					G :	\; 0		& = (r-r\cdot sin(\alpha))\cdot F_x + r\cdot cos(\alpha)\cdot F_y - r\cdot A_y + r\cdot A_x \;\;\;\; \big| \cdot \left(\frac {1}{r}\right),\, r \neq 0 \\
+									& = (1- sin(\alpha))\cdot F_x + cos(\alpha)\cdot F_y - A_y + A_x \\
+									& = (1- sin(\alpha))\cdot cos(\alpha) \cdot F + cos(\alpha)\cdot sin(\alpha)\cdot F - (sin(\alpha)-1)\cdot F + A_x \\
+									& = (1-sin(\alpha)+cos(\alpha))\cdot F + A_x
+					\end{array}
+				\)<br />
+				<span style="color:red;">\( \Rightarrow \; A_x = (sin(\alpha)-cos(\alpha)-1)\cdot F\)</span><p></p>
+				Die Formel für die horizontale Kraft \( A_x \) am Auflager \( A \) lautet:
+				<span style="color:red;">$$ \; A_x = (sin(\alpha)-cos(\alpha)-1)\cdot F $$</span>
+				<p>Wir merken an, dass die Länge (Radius) \( r \) keinen Einfluss auf \( A_x \) hat.</p>
+				<span style="">\( \blacksquare \)</span>
 			</div>
 		</div>
 	</div>

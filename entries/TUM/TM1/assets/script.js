@@ -4,6 +4,61 @@
 
 	function mTools () {
 		return {
+			clear : function (o) {
+				var mNode = o;
+				while ( mNode.tagName != "FORM" ) { // mNode.nodeName != "FORM"
+					mNode = mNode.parentNode;
+				}
+				var mTextfields = ( mNode.querySelectorAll('input[type="text"]') ) ? mNode.querySelectorAll('input[type="text"]') : [];
+				if ( mTextfields.length == 0 ) return; // Exit
+				for ( var i = 0; i < mTextfields.length; i++ ) {
+					mTextfields[i].value = "";
+				}
+			}, // clear
+			round : function (zahl, nachkommastellen) {
+				var umrechnungsfaktor = Math.pow(10, nachkommastellen);
+				return Math.round(zahl * umrechnungsfaktor) / umrechnungsfaktor;
+				/*
+				* Trickerklärung: 
+				* 1.466 soll auf e=2 Nachkommastellen gerundet werden.
+				* Zuerst, 1.466 um e=2 Stellen nach rechts verschieben:
+				* 		1.466 * 10^2 = 146.6
+				* Jetzt aufrunden mit Math.round():
+				*		Math.round(146.6) = 147
+				* weil Math,round() nur 1 Nachkommastelle runden kann.
+				* Jetzt 147 um 2 Stellen nach links verschieben:
+				*		147 / 10^2 = 1.47
+				* Damit wurde 1.466 richtig auf 2 Nachkommastellen gerundet.
+				* Alle Schritt zusammen:
+				*		var umrechnungsfaktor = Math.pow(10, e); // e = Nachkommastellen
+				*		var ergebnis = Math.round(zahl * umrechnungsfaktor) / umrechungsfaktor;
+				*/
+			}, // round
+			deg2rad : function (degVal) {
+				return degVal * Math.PI / 180;
+			}, // rad2deg
+			etest1 : function () {
+				var mE1_frm = document.frm_TM1_ETest_1,
+					mE1_F = mE1_frm.frm_TM1_ETest_1_F,
+					mE1_a = mE1_frm.frm_TM1_ETest_1_a, // alpha
+					mE1_r = mE1_frm.frm_TM1_ETest_1_r,
+					mE1_Ax = mE1_frm.frm_TM1_ETest_1_Ax;
+				return {
+					reset : function () {
+						mE1_F.value = "80";
+						mE1_a.value = "21";
+						mE1_r.value = "4";
+					}, // reset
+					calc : function () {
+						mE1_F = parseFloat(mE1_F.value);
+						mE1_a = mTools().deg2rad(parseFloat(mE1_a.value)); // deg -> rad
+						
+						var Ax = ( Math.sin(mE1_a) - Math.cos(mE1_a) - 1) * mE1_F;
+						Ax = mTools().round(Ax,1);						
+						mE1_Ax.value = "" + Ax;
+					}, // calc
+				}
+			}, // etest1
 			uebung1_2 : function () {
 				var mU12_frm = document.frm_TM1_Uebung1_2,
 					mU12_G = mU12_frm.frm_TM1_Uebung1_2_G,
@@ -14,13 +69,6 @@
 					mU12_Fl = mU12_frm.frm_TM1_Uebung1_2_Fl,
 					mU12_Fr = mU12_frm.frm_TM1_Uebung1_2_Fr;
 				return {
-						clear : function () {
-							mU12_G.value = "";
-							mU12_F.value = "";
-							mU12_a.value = "";
-							mU12_b.value = "";
-							mU12_c.value = "";
-						}, // clear
 						reset : function () {
 							mU12_G.value = "500";
 							mU12_F.value = "200";
@@ -28,41 +76,19 @@
 							mU12_b.value = "45";
 							mU12_c.value = "60";
 						}, // reset
-						round : function (zahl, nachkommastellen) {
-							var umrechnungsfaktor = Math.pow(10, nachkommastellen);
-							return Math.round(zahl * umrechnungsfaktor) / umrechnungsfaktor;
-							/*
-							 * Trickerklärung: 
-							 * 1.466 soll auf e=2 Nachkommastellen gerundet werden.
-							 * Zuerst, 1.466 um e=2 Stellen nach rechts verschieben:
-							 * 		1.466 * 10^2 = 146.6
-							 * Jetzt aufrunden mit Math.round():
-							 *		Math.round(146.6) = 147
-							 * weil Math,round() nur 1 Nachkommastelle runden kann.
-							 * Jetzt 147 um 2 Stellen nach links verschieben:
-							 *		147 / 10^2 = 1.47
-							 * Damit wurde 1.466 richtig auf 2 Nachkommastellen gerundet.
-							 * Alle Schritt zusammen:
-							 *		var umrechnungsfaktor = Math.pow(10, e); // e = Nachkommastellen
-							 *		var ergebnis = Math.round(zahl * umrechnungsfaktor) / umrechungsfaktor;
-							 */
-						}, // round
-						deg2rad : function (degVal) {
-							return degVal * Math.PI / 180;
-						}, // rad2deg
 						calc : function () {
 							mU12_G = parseFloat(mU12_G.value);
 							mU12_F = parseFloat(mU12_F.value);
-							mU12_a = this.deg2rad(parseFloat(mU12_a.value));
-							mU12_b = this.deg2rad(parseFloat(mU12_b.value));
-							mU12_c = this.deg2rad(parseFloat(mU12_c.value));
+							mU12_a = mTools().deg2rad(parseFloat(mU12_a.value)); // deg -> rad
+							mU12_b = mTools().deg2rad(parseFloat(mU12_b.value));
+							mU12_c = mTools().deg2rad(parseFloat(mU12_c.value));
 							
 							var Fl = mU12_F * ( Math.sin(mU12_a) - Math.cos(mU12_a) * Math.tan(mU12_c) ) + mU12_G;
 							Fl /= Math.sin(mU12_b) + Math.cos(mU12_b) * Math.tan(mU12_c);							
 							var Fr = mU12_F * (Math.cos(mU12_a)/Math.cos(mU12_c)) + Fl * (Math.cos(mU12_b)/Math.cos(mU12_c));
 							
-							mU12_Fl.value = "" + this.round(Fl,1);
-							mU12_Fr.value = "" + this.round(Fr,1);
+							mU12_Fl.value = "" + mTools().round(Fl,1);
+							mU12_Fr.value = "" + mTools().round(Fr,1);
 						}, // calc
 				};
 			},
@@ -134,7 +160,7 @@
 			strStyle = "box-shadow: 0 0 4px rgba(30,30,30,.6);";
 			strStyle += "width:" + (windowSize.width / 2) + "px;";
 		}
-		strStyle += "height:" + mGetPageHeight()*2 + "px;";
+		strStyle += "height:" + mGetPageHeight()*1.22 + "px;";
 		document.getElementById("mPage").setAttribute("style", strStyle);		
 	}
 	
