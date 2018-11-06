@@ -59,6 +59,9 @@
 					}, // calc
 				}
 			}, // etest1
+			/*
+			 *
+			 */
 			uebung1_2 : function () {
 				var mU12_frm = document.frm_TM1_Uebung1_2,
 					mU12_G = mU12_frm.frm_TM1_Uebung1_2_G,
@@ -91,7 +94,36 @@
 							mU12_Fr.value = "" + mTools().round(Fr,1);
 						}, // calc
 				};
-			},
+			}, // uebung1_2
+			/*
+			 *
+			 */
+			uebung1_3 : function () {
+				var mU13_frm = document.frm_TM1_Uebung1_3,
+					mU13_R = mU13_frm.frm_TM1_Uebung1_3_R, // Rx = R
+					mU13_a = mU13_frm.frm_TM1_Uebung1_3_a, // alpha
+					mU13_b = mU13_frm.frm_TM1_Uebung1_3_b, // theta
+					mU13_FA = mU13_frm.frm_TM1_Uebung1_3_FA,
+					mU13_FB = mU13_frm.frm_TM1_Uebung1_3_FB;
+				return {
+						reset : function () {
+							mU13_R.value = "950";
+							mU13_a.value = "20"; // alpha
+							mU13_b.value = "50"; // theta
+						}, // reset
+						calc : function () {
+							mU13_R = parseFloat(mU13_R.value);
+							mU13_a = mTools().deg2rad(parseFloat(mU13_a.value)); // deg -> rad
+							mU13_b = mTools().deg2rad(parseFloat(mU13_b.value));
+							
+							var FB = mU13_R / ( (Math.cos(mU13_a)/Math.sin(mU13_a)) * Math.sin(mU13_b) + Math.cos(mU13_b) );
+							var FA = (mU13_R * Math.sin(mU13_b)) / ( Math.cos(mU13_a) * Math.sin(mU13_b) + Math.cos(mU13_b) * Math.sin(mU13_a) );
+							
+							mU13_FB.value = "" + mTools().round(FB,1);
+							mU13_FA.value = "" + mTools().round(FA,1);
+						}, // calc
+				};
+			}, // uebung1_3
 		};
 	}
 	
@@ -160,7 +192,7 @@
 			strStyle = "box-shadow: 0 0 4px rgba(30,30,30,.6);";
 			strStyle += "width:" + (windowSize.width / 2) + "px;";
 		}
-		strStyle += "height:" + mGetPageHeight()*1.22 + "px;";
+		strStyle += "height:" + mGetPageHeight()*1.34 + "px;";
 		document.getElementById("mPage").setAttribute("style", strStyle);		
 	}
 	

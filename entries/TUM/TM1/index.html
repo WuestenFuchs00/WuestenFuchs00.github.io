@@ -21,6 +21,12 @@
 		<div class="mSection">
 			<div class="mSubsection">
 				<p><b>Aufgabe 1.1</b></p>
+				<img src="media/TM1_Uebung1_Aufg1.1.png" onload="mResizeImg(this);" border="1" />
+			</div>
+		</div>
+		<div class="mSection">
+			<div class="mSubsection">
+				<b>Lösung:</b><br />
 				Eine gegebene Kraft \( \vec F \) ist eindeutig in Einzelkräfte zu zerlegen, deren 
 				Wirkungslinien gegeben sind. In folgenden Fällen 1 und 3 ist eine solche Zerlegung möglich.
 				<p><img src="media/TM1_Uebung1_Aufg1.1_lsg.png" onload="mResizeImg(this);" border="1" /></p>
@@ -45,6 +51,8 @@
 					</ol>
 				</p>
 			</div>
+		</div>
+		<div class="mSection">
 			<div class="mSubsection">
 				<b>Lösung</b>: Freischnitt der Walze mit allen wirkenden Kräften:
 				<p><img src="media/TM1_Uebung1_Aufg1.2_b3.png" border="1" onload="mResizeImg(this);" /></p>
@@ -131,10 +139,116 @@
 						<p style="color:red;">$$ |F_r| = +\left( F \cdot \frac{cos(\alpha)}{cos(\gamma)} + |F_l| \cdot \frac{cos(\beta)}{cos(\gamma)} \right) $$</p>
 					</li>
 					<li>
+						Wenn die Walze aus der Führung gedrückt werden soll, muss es gelten:
+						$$ F_l = 0 $$
+						denn da gibt es keinen Kontakt zwischen der Walze und der linken Seite der
+						Führung mehr. Und die Walze bewegt sich nach rechts aus der Führung.
+						$$ 
+						\begin{array}{rl}
+							F_{l}\;\;\; = & 0 \; = -\left( \frac{F \cdot \left( sin(\alpha) - \frac{sin(\gamma)}{cos(\gamma)} \cdot cos(\alpha) \right) + G}{sin(\beta) + \frac{sin(\gamma)}{cos(\gamma)} \cdot cos(\beta)} \right) \\
+									& 0  \; = F \cdot \left( sin(\alpha) - \frac{sin(\gamma)}{cos(\gamma)} \cdot cos(\alpha) \right) + G
+						\end{array}
+						Damit beträgt die externe Kraft \( F \):
+						<span style="color:red;">$$ F = \frac{G}{\frac{sin(\gamma)}{cos(\gamma)}\cdot cos(\alpha) - sin(\alpha)} $$</span>
+						für \( F_l = 0 \). Setzt man z.B. die Werte \( G = 500\,N,\; \alpha = 30°,\; \gamma = 60°\) ein, ergibt sich:
+						<span style="color:red;">$$ F = 500\, N $$</span>
+						Das ist der höchste Wert, bevor die Walze aus der Führung gedrückt wird.
 					</li>
 				</ol>
 			</div>
 		</div>
+		<div class="mSection">
+			<div class="mSubsection">
+				<p><b>Aufgabe 1.3</b></p>
+				Ein Pickup-Wagen soll mithilfe zweier Seile in Richtung der x-Achse gezogen werden
+				(<i>siehe Bild</i>). Dazu ist eine resultierende Kraft von \( 950\, N\) in axialer
+				Richtung erforderlich.<p></p>
+				<img src="media/TM1_Uebung1_Aufg1.3.png" border="1" onload="mResizeImg(this);" />
+				<p><b>Gegeben</b>:
+					<ul style="list-stlye-type:none;">\( R = 950\, N, \; \alpha = 20°\)</ul>
+				</p>
+				<p><b>Gesucht</b>:
+					<ol>
+						<li>Setzt man \( \theta := 50°\), wie groß ist dann \( F_B \) zu wählen?<br />
+							<i>Lösung:</i> \( F_B = 345,8\,N \)
+						</li>
+						<li>Welcher optimale Wert ist für \( \theta \) zu wählen, damit \( F_B \) möglichst gering wird?<br />
+							<i>Lösung:</i> \( \theta = 70° \)
+						</li>
+					</ol>
+				</p>
+			</div>
+		</div>
+		<div class="mSection">
+			<div class="mSubsection">
+				<b>Lösung</b>:
+				<p>
+					<form id="frm_TM1_Uebung1_3" name="frm_TM1_Uebung1_3" style="width: 300px; background-color: rgba(80,80,80,.2); padding: 1px 8px 8px 8px;">
+						<p>Tool zum Rechnen der horizontalen Auflagerkraft \( A_x \):</p>
+						<label>\( R \) : &nbsp;</label><input name="frm_TM1_Uebung1_3_R" class="mTextRight" type="text" value="950" minlength="4" maxlength="8" size="8" /> N
+						<input class="mButton" type="button" value="Reset" onclick="mTools().uebung1_3().reset()" /><br />
+						<label>\( \alpha \) : &nbsp;</label><input name="frm_TM1_Uebung1_3_a" class="mTextRight" type="text" value="20" minlength="4" maxlength="8" size="8" /> °&nbsp;&nbsp;
+						<input class="mButton" type="button" value="Löschen" onclick="mTools().clear(this)" /><p></p>
+						<label>\( \theta \) : &nbsp;</label><input name="frm_TM1_Uebung1_3_b" class="mTextRight" type="text" value="50" minlength="4" maxlength="8" size="8" /> °&nbsp;&nbsp;
+						<input class="mButton" type="button" value="Rechnen" onclick= "mTools().uebung1_3().calc()" /><br />
+						<hr />
+						<label>\( F_A \) : &nbsp;</label><input name="frm_TM1_Uebung1_3_FA" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> N<br />
+						<label>\( F_B \) : &nbsp;</label><input name="frm_TM1_Uebung1_3_FB" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> N
+					</form>	
+				</p>
+				<ol>
+					<li>
+						Bezeichnet \( R = 950\,N \) als die resultierende Kraft in axialer x-Richtung, und \( \alpha = 20° \).
+						(<i>vgl. Bild</i>).
+						<p><img src="media/TM1_Uebung1_Aufg1.3b.png" border="1" onload="mResizeImg(this);" /></p>
+						Die zusammenhängenden Kraftvektoren sind:
+						<p>\( \vec R = \begin{bmatrix} R_x \\ R_y \end{bmatrix} = \begin{bmatrix} R_x \\ 0 \end{bmatrix} \)</p>
+						<p>\( \vec F_A = \begin{bmatrix} F_{Ax} \\ F_{Ay} \end{bmatrix} = F_A \cdot \begin{bmatrix} cos(\alpha) \\ sin(\alpha) \end{bmatrix} \)</p>
+						<p>\( \vec F_B = \begin{bmatrix} F_{Bx} \\ F_{By} \end{bmatrix} = F_B \cdot \begin{bmatrix} cos(\theta) \\ -sin(\theta) \end{bmatrix} \)</p>
+						Für die Resultierende \( R \) gilt:
+						<span style="color:red;">$$ \vec R = \vec F_A + \vec F_B $$</span>
+						und
+						$$ R = |\vec R| = \sqrt{{R_x}^2 + {R_y}^2} = \sqrt{{R_x}^2 + 0} = R_x $$
+						und damit
+						<span style="color:red;">$$ R_x = R = 950\, N $$</span>
+						Aus \( \vec R = \vec F_A + \vec F_B \) gibt es zwei Gleichungen:
+						$$
+							\begin{array}{ll}
+								I.\;\; R_x & = F_A \cdot cos(\alpha) + F_B \cdot cos(\theta) \\
+								II.\; 0    & = F_A \cdot sin(\alpha) + F_B \cdot cos(\theta) \\
+							\end{array}
+						$$
+						Aus Gleichung \( II. \) folgt:
+						<span style="color:red;">$$ F_A = F_B \cdot \frac{sin(\theta)}{sin(\alpha)} \;\;\;\;\;\;\;\;\;\;\;\;\;\; (*)$$</span>
+						Setzt man \( F_A \) aus \( (*) \) in Gleichung \( I. \) ein, bekommt man:
+						$$ R_x = F_B \cdot \left( \frac{cos(\alpha)}{sin(\alpha)}\cdot sin(\theta) + cos(\theta) \right) $$
+						und somit:
+						<span style="color:red;">$$ F_B = \frac{R_x}{\frac{cos(\alpha)}{sin(\alpha)}\cdot sin(\theta) + cos(\theta) } = \frac{R}{\frac{cos(\alpha)}{sin(\alpha)}\cdot sin(\theta) + cos(\theta) } $$</span>
+						Setzt man die Werte z.B. \( R_x = R = 950\,N \), \(\alpha = 20° \) und \( \theta = 50° \) ein, bekommt man:
+						<span style="color:red;">$$ F_B = 354,8\, N $$</span>
+						\( \blacksquare \)
+					</li>
+					<li>
+						Jetzt ist der Winkel \( \theta \) variabel und die Kraft \( F_B \) eine Funktion
+						von \( \theta \):
+						$$ F_B (\theta) = \frac{R}{\frac{cos(\alpha)}{sin(\alpha)}\cdot sin(\theta) + cos(\theta) } $$
+						Damit \( F_B \) möglichst gering ist, muss \( \theta \) die Stelle sein, an der \( F_B (\theta) \)
+						minimal ist (d.h. \( F_B \) hat an dieser Stelle \( \theta \) den Anstieg <span style="color:red;">\( \dot F_B = 0 \)</span> ).
+						Es gilt:
+						$$ \dot F_B = \frac{d}{d\theta}\,F_B (\theta) = (-R) \cdot \frac{\frac{cos(\alpha)}{sin(\alpha)}\cdot cos(\theta) - sin(\theta)}{\left(\frac{cos(\alpha)}{sin(\alpha)}\cdot sin(\theta) + cos(\theta)\right)^2} $$
+						Setzt man \( \dot F_B = 0 \), also:
+						$$ 0 = \dot F_B = (-R) \cdot \frac{\frac{cos(\alpha)}{sin(\alpha)}\cdot cos(\theta) - sin(\theta)}{\left(\frac{cos(\alpha)}{sin(\alpha)}\cdot sin(\theta) + cos(\theta)\right)^2} $$
+						bekommt man:
+						$$ 0 = \frac{cos(\alpha)}{sin(\alpha)}\cdot cos(\theta) - sin(\theta) $$
+						bzw.
+						$$ tan(\theta) = \frac{sin(\theta)}{cos(\theta)} = \frac{cos(\alpha)}{sin(\alpha)} $$
+						Daraus folgt:
+						<span style="color:red;">$$ \theta = tan^{-1}\left(\frac{cos(\alpha)}{sin(\alpha)} \right) $$</span>
+						Setzt man \( \alpha = 20° \) ein, erhält man:
+						<span style="color:red;">$$ \theta = 70° $$</span>
+						\( \blacksquare \)
+					</li>
+				</ol>
 	</div>
 	<div id="mFooter"></div>
 </div>
