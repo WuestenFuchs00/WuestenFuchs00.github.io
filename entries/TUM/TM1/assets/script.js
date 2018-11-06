@@ -192,7 +192,7 @@
 			strStyle = "box-shadow: 0 0 4px rgba(30,30,30,.6);";
 			strStyle += "width:" + (windowSize.width / 2) + "px;";
 		}
-		strStyle += "height:" + mGetPageHeight()*1.34 + "px;";
+		strStyle += "height:" + mGetPageHeight()*1.5 + "px;";
 		document.getElementById("mPage").setAttribute("style", strStyle);		
 	}
 	
