@@ -2,6 +2,7 @@
  * style.css
  */
 html, body { width: 100%; margin: 0; padding:0; }
+a { text-decoration: none; }
 div#mPage { /* align middle */ margin: 0 auto; }
 div#mHeaderTitle {
 	padding: 10px 6px; background-color: rgba(10,109,221,.8); color: #fff; font-family: 'Notable', sans-serif;
