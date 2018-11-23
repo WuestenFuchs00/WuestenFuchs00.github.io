@@ -3,6 +3,7 @@
  */ 
 var mJS = (function () {
 	var g = {
+		pageWidth : 820, // px
 		captions : ["Technische Mechanik", "Chemie", "Physik", "Technische Elektrizitätslehre", "CAD", "", "", ""],
 		styleBoxes : [
 			"background: linear-gradient(45deg, #2e86c1, #3498db, #5dade2, #85c1e9 86%);", /* MouseOver */ 
@@ -57,9 +58,14 @@ var mJS = (function () {
 			var imgWidth = o.getBoundingClientRect().width,
 				imgHeight = o.getBoundingClientRect().height;
 			// Calculate (new) image size, related to (current) window size
-			var offset = 5*6; // from css style, margin left/right, factor 5x
+			var offset = 5*6; // from css style mSection, padding left/right, factor 5x
 			var windowSize = mGetWindowSize();
-			var newImgWidth = ( imgWidth > windowSize.width ) ? windowSize.width : imgWidth;
+			var newImgWidth;
+			if ( windowSize.width >= g.pageWidth ) {
+				newImgWidth = ( imgWidth >= g.pageWidth ) ? g.pageWidth : imgWidth;
+			} else {
+				newImgWidth = ( imgWidth >= windowSize.width ) ? windowSize.width : imgWidth;
+			}
 			newImgWidth -= offset;
 			var newImgHeight = ( imgWidth > windowSize.width ) ? (imgHeight / imgWidth) * newImgWidth : imgHeight;
 			// Set image size
@@ -161,7 +167,7 @@ var mJS = (function () {
 		mResizeScreen : function () {
 			var windowSize = this.mGetWindowSize();
 			var strStyle = "";
-			if ( windowSize.width > 820 ) {
+			if ( windowSize.width > g.pageWidth ) {
 				strStyle = "box-shadow: 0 0 4px rgba(30,30,30,.6); width:" + (windowSize.width / 2) + "px;";
 			}
 			strStyle += "height:" + this.mGetPageHeight()*2 + "px;";
@@ -202,7 +208,7 @@ var mJS = (function () {
 	}
 })();
 
-// document.addEventListener("DOMContentLoaded", () => mJS.mScaleBoxes(), false);
+// document.addEventListener("DOMContentLoaded", () => mJS.mJS.mInit(), false);
 document.addEventListener("DOMContentLoaded", function () { mJS.mInit(); }, false);
 
 /*

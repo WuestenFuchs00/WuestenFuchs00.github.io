@@ -52,6 +52,7 @@
 						<hr />
 						<label>\( A_x \) : &nbsp;</label><input name="frm_TM1_ETest_1_Ax" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> kN
 					</form>	
+					<script type="text/javascript">mTools().etest1().reset();</script>
 				</p>
 				<p>Wir bezeichnen das Gelenk als <span style="color:red;">\( G \)</span> (<i>vgl. Bild unten</i>).</p>
 				<img src="media/TM1_ETest_1c.png" onload="mResizeImg(this);" border="1" />
@@ -106,8 +107,46 @@
 				<span style="">\( \blacksquare \)</span>
 			</div>
 		</div>
+		<div class="mSection">
+			<div class="mSubsection">
+				<p><b>E-Test 2</b></p>
+				<p><a href="media/TM1_ETest_2.png" target="_blank"><img src="media/TM1_ETest_2.png" onload="mResizeImg(this);" border="1" /></a></p>
+			</div>
+		</div>
+		<div class="mSection">
+			<div class="mSubsection">
+				<b>Lösung:</b>
+				<p>
+					<form id="frm_TM1_ETest_2" name="frm_TM1_ETest_2" style="width: 300px; background-color: rgba(80,80,80,.2); padding: 1px 8px 8px 8px;">
+						<p>Tool zum Rechnen der Stabkraft \( S_1 \):</p>
+						<label>\( F_1 \) : &nbsp;</label><input name="frm_TM1_ETest_2_F1" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" /> kN
+						<input class="mButton" type="button" value="Reset" onclick="mTools().etest2().reset()" /><br />
+						<label>\( F_2 \) : &nbsp;</label><input name="frm_TM1_ETest_2_F2" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" /> kN
+						<input class="mButton" type="button" value="Löschen" onclick="mTools().clear(this)" /><br />
+						<label>\( \alpha \) : &nbsp;&nbsp;&nbsp;</label><input name="frm_TM1_ETest_2_a" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" /> °&nbsp;&nbsp;&nbsp;&nbsp;<br />
+						<label>\( b \) : &nbsp;&nbsp;&nbsp;&nbsp;</label><input name="frm_TM1_ETest_2_b" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" /> m&nbsp;&nbsp;&nbsp;
+						<input class="mButton" type="button" value="Rechnen" onclick= "mTools().etest2().calc()" /><br />
+						<hr />
+						<label>\( A_H \) : &nbsp;</label><input name="frm_TM1_ETest_2_AH" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> kN<br />
+						<label>\( A_V \) : &nbsp;</label><input name="frm_TM1_ETest_2_AV" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> kN<br />
+						<label>\( B_V \) : &nbsp;</label><input name="frm_TM1_ETest_2_BV" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> kN<p></p>
+						<label>\( S_1 \)  : &nbsp;</label><input name="frm_TM1_ETest_2_S1" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> kN
+					</form>
+					<script type="text/javascript">mTools().etest2().reset();</script>
+				</p>
+				<p>
+					Auflagerkräfte:
+						$$ A_H = F_1 $$
+						$$ A_V = \frac{1}{2}\cdot F_2 + \frac{tan(\alpha)}{4}\cdot F_1 $$
+						$$ B_V = \frac{1}{2}\cdot F_2 - \frac{tan(\alpha)}{4}\cdot F_1 $$
+					Stabkraft:
+						$$ S_1 = -\frac{1}{4}\cdot F_1 + \frac{1}{2\cdot tan(\alpha)}\cdot F_2 $$
+				</p>
+			</div>
+		</div>
 	</div>
 	<div id="mFooter"></div>
 </div>
 </body>
+<!-- <script type="text/javascript">mRefreshPage();</script> -->
 </html>

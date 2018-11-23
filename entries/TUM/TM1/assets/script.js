@@ -2,6 +2,10 @@
  * script.js
  */
 
+	var g = {
+		pageWidth : 820, // px
+	};
+	
 	function mTools () {
 		return {
 			clear : function (o) {
@@ -37,6 +41,13 @@
 			deg2rad : function (degVal) {
 				return degVal * Math.PI / 180;
 			}, // rad2deg
+			replaceCommaByDot : function (strVal) {
+				var regex = /,/g; // The comma is given by ','
+				if ( strVal.search(regex) != -1 ) { // returns the first occurence (index) of Comma in string strVal, otherwise returns -1
+					strVal = strVal.replace(regex, "."); // comma is replaced by dot (.)
+				}
+				return strVal;
+			}, // replaceCommaByDot
 			etest1 : function () {
 				var mE1_frm = document.frm_TM1_ETest_1,
 					mE1_F = mE1_frm.frm_TM1_ETest_1_F,
@@ -50,15 +61,71 @@
 						mE1_r.value = "4";
 					}, // reset
 					calc : function () {
-						mE1_F = parseFloat(mE1_F.value);
-						mE1_a = mTools().deg2rad(parseFloat(mE1_a.value)); // deg -> rad
+						mE1_F = parseFloat(mTools().replaceCommaByDot(mE1_F.value));
+						mE1_a = mTools().deg2rad(parseFloat(mTools().replaceCommaByDot(mE1_a.value))); // deg -> rad
 						
 						var Ax = ( Math.sin(mE1_a) - Math.cos(mE1_a) - 1) * mE1_F;
-						Ax = mTools().round(Ax,1);						
-						mE1_Ax.value = "" + Ax;
+						mE1_Ax.value = ("" + mTools().round(Ax,1)).replace(".", ","); // replace Dot by Comma
+						
+						if ( Ax > 0 ) mE1_Ax.value = "+" + mE1_Ax.value;
+						if ( mE1_Ax.value.search(/,/g) == -1 ) { // wenn Ergebnis keine Nachkommastellen hat, z.B. +126. Dann fuegt Nullkommastellen hnzu -> +126,0
+							mE1_Ax.value += ",0";
+						}
 					}, // calc
 				}
 			}, // etest1
+			etest2 : function () {
+				var mE2_frm = document.frm_TM1_ETest_2,
+					mE2_F1 = mE2_frm.frm_TM1_ETest_2_F1,
+					mE2_F2 = mE2_frm.frm_TM1_ETest_2_F2,
+					mE2_a = mE2_frm.frm_TM1_ETest_2_a, // alpha
+					mE2_b = mE2_frm.frm_TM1_ETest_2_b,
+					mE2_AV = mE2_frm.frm_TM1_ETest_2_AV,
+					mE2_AH = mE2_frm.frm_TM1_ETest_2_AH,
+					mE2_BV = mE2_frm.frm_TM1_ETest_2_BV,
+					mE2_S1 = mE2_frm.frm_TM1_ETest_2_S1;
+				return {
+					reset : function () {
+						mE2_F1.value = "67.3";
+						mE2_F2.value = "97.1";
+						mE2_a.value = "38.5";
+						mE2_b.value = "3.3";
+						mE2_AV.value = "?";
+						mE2_AH.value = "?";
+						mE2_BV.value = "?";
+						mE2_S1.value = "?";
+					}, // reset
+					calc : function () {
+						mE2_F1 = parseFloat(mTools().replaceCommaByDot(mE2_F1.value));
+						mE2_F2 = parseFloat(mTools().replaceCommaByDot(mE2_F2.value));
+						mE2_a = mTools().deg2rad(parseFloat(mTools().replaceCommaByDot(mE2_a.value))); // deg -> rad
+						mE2_b = parseFloat(mTools().replaceCommaByDot(mE2_b.value));
+						
+						var AV = 0.5 * mE2_F2 + (mE2_F1 * Math.tan(mE2_a) * 0.25);
+						var AH = mE2_F1;
+						var BV = 0.5 * mE2_F2 - (mE2_F1 * Math.tan(mE2_a) * 0.25);
+						var S1 = -0.25 * mE2_F1 + (mE2_F2 / (Math.tan(mE2_a) * 2));
+						AV = mTools().round(AV,1);
+						BV = mTools().round(BV,1);
+						S1 = mTools().round(S1,1);
+						
+						mE2_AV.value = ("" + AV).replace(".", ","); // replace Dot by Comma
+						mE2_AH.value = ("" + mTools().round(mE2_F1, 1)).replace(".", ",");
+						mE2_BV.value = ("" + BV).replace(".", ",");
+						mE2_S1.value = ("" + S1).replace(".", ",");
+						
+						if ( AV > 0 ) mE2_AV.value = "+" + mE2_AV.value;
+						if ( AH > 0 ) mE2_AH.value = "+" + mE2_AH.value;
+						if ( BV > 0 ) mE2_BV.value = "+" + mE2_BV.value;
+						if ( S1 > 0 ) mE2_S1.value = "+" + mE2_S1.value;
+						
+						if ( mE2_AV.value.search(/,/g) == -1 ) mE2_AV.value += ",0";
+						if ( mE2_AH.value.search(/,/g) == -1 ) mE2_AH.value += ",0";
+						if ( mE2_BV.value.search(/,/g) == -1 ) mE2_BV.value += ",0";
+						if ( mE2_S1.value.search(/,/g) == -1 ) mE2_S1.value += ",0";
+					}, // calc
+				}
+			}, // etest2
 			/*
 			 *
 			 */
@@ -128,6 +195,25 @@
 	}
 	
 	/*
+	 * Refreshes / Reloades the page (window.location)
+	 */
+	function mRefreshPage () {
+		if ( !location.hash || !window.location.hash ) {
+			// If the URL is "www.website.com#part1", then "location.hash" returns
+			// the anchor part beginning with # (hash), i.e. "#part1", including the
+			// hash sign (#). If the URL is "www.website.com" without the anchor hash
+			// part, then "location.hash" returns null.
+			if ( location ) { 
+				location += "#loaded";
+				location.reload();
+			}
+			else { 
+				window.location += "#loaded";
+				window.location.reload(false);
+			}
+		}
+	}
+	/*
 	 * Provides the current window size. If the window is resized by the user,
 	 * this function also returns the updated window/screen size.
 	 */
@@ -146,9 +232,14 @@
 		var imgWidth = o.getBoundingClientRect().width,
 			imgHeight = o.getBoundingClientRect().height;
 		// Calculate (new) image size, related to (current) window size
-		var offset = 5*6; // from css style, margin left/right, factor 5x
+		var offset = 5*6; // from css style mSection, padding left/right, factor 5x
 		var windowSize = mGetWindowSize();
-		var newImgWidth = ( imgWidth > windowSize.width ) ? windowSize.width : imgWidth;
+		var newImgWidth;
+		if ( windowSize.width >= g.pageWidth ) {
+			newImgWidth = ( imgWidth >= g.pageWidth ) ? g.pageWidth : imgWidth;
+		} else {
+			newImgWidth = ( imgWidth >= windowSize.width ) ? windowSize.width : imgWidth;
+		}
 		newImgWidth -= offset;
 		var newImgHeight = ( imgWidth > windowSize.width ) ? (imgHeight / imgWidth) * newImgWidth : imgHeight;
 		// Set image size
@@ -188,12 +279,12 @@
 	function mResizeScreen() {
 		var windowSize = this.mGetWindowSize();
 		var strStyle = "";
-		if ( windowSize.width > 820 ) {
+		if ( windowSize.width > g.pageWidth ) {
 			strStyle = "box-shadow: 0 0 4px rgba(30,30,30,.6);";
-			strStyle += "width:" + (windowSize.width / 2) + "px;";
+			strStyle += "width:" + (windowSize.width / 1.6) + "px;";
 		}
-		strStyle += "height:" + mGetPageHeight()*1.5 + "px;";
-		document.getElementById("mPage").setAttribute("style", strStyle);		
+		strStyle += "height:" + mGetPageHeight()*1.5 + "px;"; // factor 1.5
+		document.getElementById("mPage").setAttribute("style", strStyle);
 	}
 	
 document.addEventListener("DOMContentLoaded", function () { mResizeScreen(); }, false);
