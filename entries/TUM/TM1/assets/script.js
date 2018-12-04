@@ -41,13 +41,24 @@
 			deg2rad : function (degVal) {
 				return degVal * Math.PI / 180;
 			}, // rad2deg
-			replaceCommaByDot : function (strVal) {
+			replaceCommaByDot : function (mVal) {
+				var tmp = "" + mVal;
 				var regex = /,/g; // The comma is given by ','
-				if ( strVal.search(regex) != -1 ) { // returns the first occurence (index) of Comma in string strVal, otherwise returns -1
-					strVal = strVal.replace(regex, "."); // comma is replaced by dot (.)
+				if ( tmp.search(regex) != -1 ) { // returns the first occurence (index) of Comma in string strVal, otherwise returns -1
+					tmp = tmp.replace(regex, "."); // comma is replaced by dot (.)
 				}
-				return strVal;
+				return tmp;
 			}, // replaceCommaByDot
+			replaceDotByComma : function (mVal) {
+				return ("" + mVal).replace(".", ",");
+			}, // replaceDotByComma
+			formatResult : function ( /* double */ fVal ) { // return string
+				var strRes = mTools().replaceDotByComma(fVal);
+				if ( fVal > 0 ) strRes = "+" + strRes;
+				// wenn Ergebnis keine Nachkommastellen hat, z.B. +126. Dann fuegt Nullkommastellen hinzu -> +126,0
+				if ( strRes.search(/,/g) == -1 ) strRes += ",0";
+				return strRes;
+			}, // formatResult
 			etest1 : function () {
 				var mE1_frm = document.frm_TM1_ETest_1,
 					mE1_F = mE1_frm.frm_TM1_ETest_1_F,
@@ -68,7 +79,7 @@
 						mE1_Ax.value = ("" + mTools().round(Ax,1)).replace(".", ","); // replace Dot by Comma
 						
 						if ( Ax > 0 ) mE1_Ax.value = "+" + mE1_Ax.value;
-						if ( mE1_Ax.value.search(/,/g) == -1 ) { // wenn Ergebnis keine Nachkommastellen hat, z.B. +126. Dann fuegt Nullkommastellen hnzu -> +126,0
+						if ( mE1_Ax.value.search(/,/g) == -1 ) { // wenn Ergebnis keine Nachkommastellen hat, z.B. +126. Dann fuegt Nullkommastellen hinzu -> +126,0
 							mE1_Ax.value += ",0";
 						}
 					}, // calc
@@ -86,10 +97,10 @@
 					mE2_S1 = mE2_frm.frm_TM1_ETest_2_S1;
 				return {
 					reset : function () {
-						mE2_F1.value = "67.3";
-						mE2_F2.value = "97.1";
-						mE2_a.value = "38.5";
-						mE2_b.value = "3.3";
+						mE2_F1.value = "67,3";
+						mE2_F2.value = "97,1";
+						mE2_a.value = "38,5";
+						mE2_b.value = "3,3";
 						mE2_AV.value = "?";
 						mE2_AH.value = "?";
 						mE2_BV.value = "?";
@@ -126,6 +137,33 @@
 					}, // calc
 				}
 			}, // etest2
+			etest3 : function () {
+				var mE3_frm = document.frm_TM1_ETest_3,
+					mE3_M = mE3_frm.frm_TM1_ETest_3_M,
+					mE3_q0 = mE3_frm.frm_TM1_ETest_3_q0,
+					mE3_l = mE3_frm.frm_TM1_ETest_3_l,
+					mE3_n = mE3_frm.frm_TM1_ETest_3_n,
+					mE3_x = mE3_frm.frm_TM1_ETest_3_x;
+				return {
+					reset : function () {
+						mE3_q0.value = "141,5";
+						mE3_l.value = "8,1";
+						mE3_n.value = "5";
+						mE3_x.value = "0,72";
+					}, // reset
+					calc : function () {
+						mE3_q0 = parseFloat(mTools().replaceCommaByDot(mE3_q0.value));
+						mE3_l = parseFloat(mTools().replaceCommaByDot(mE3_l.value));
+						mE3_n = parseFloat(mTools().replaceCommaByDot(mE3_n.value));
+						mE3_x = parseFloat(mTools().replaceCommaByDot(mE3_x.value));
+						
+						var M = (-1) * (mE3_q0 * mE3_l * mE3_l) / ((mE3_n + 1) * (mE3_n + 2));
+						M *= Math.pow(mE3_x, mE3_n +2);
+						M =  mTools().round(M,1); // Auf eine Nachkommastelle runden						
+						mE3_M.value = mTools().formatResult(M);
+					}, // calc
+				}
+			}, // etest3
 			/*
 			 *
 			 */

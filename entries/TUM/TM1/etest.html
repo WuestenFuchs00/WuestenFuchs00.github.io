@@ -42,7 +42,7 @@
 				<b>Lösung:</b>
 				<p>
 					<form id="frm_TM1_ETest_1" name="frm_TM1_ETest_1" style="width: 300px; background-color: rgba(80,80,80,.2); padding: 1px 8px 8px 8px;">
-						<p>Tool zum Rechnen der horizontalen Auflagerkraft \( A_x \):</p>
+						<p>Tool zum Berechnen der horizontalen Auflagerkraft \( A_x \):</p>
 						<label>\( F \) : &nbsp;</label><input name="frm_TM1_ETest_1_F" class="mTextRight" type="text" value="80" minlength="4" maxlength="8" size="8" /> kN
 						<input class="mButton" type="button" value="Reset" onclick="mTools().etest1().reset()" /><br />
 						<label>\( \alpha \) : &nbsp;</label><input name="frm_TM1_ETest_1_a" class="mTextRight" type="text" value="21" minlength="4" maxlength="8" size="8" /> °&nbsp;&nbsp;&nbsp;&nbsp;
@@ -107,6 +107,7 @@
 				<span style="">\( \blacksquare \)</span>
 			</div>
 		</div>
+		<!-- E-Test 2 -->
 		<div class="mSection">
 			<div class="mSubsection">
 				<p><b>E-Test 2</b></p>
@@ -118,7 +119,7 @@
 				<b>Lösung:</b>
 				<p>
 					<form id="frm_TM1_ETest_2" name="frm_TM1_ETest_2" style="width: 300px; background-color: rgba(80,80,80,.2); padding: 1px 8px 8px 8px;">
-						<p>Tool zum Rechnen der Stabkraft \( S_1 \):</p>
+						<p>Tool zum Berechnen der Stabkraft \( S_1 \):</p>
 						<label>\( F_1 \) : &nbsp;</label><input name="frm_TM1_ETest_2_F1" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" /> kN
 						<input class="mButton" type="button" value="Reset" onclick="mTools().etest2().reset()" /><br />
 						<label>\( F_2 \) : &nbsp;</label><input name="frm_TM1_ETest_2_F2" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" /> kN
@@ -142,6 +143,44 @@
 					Stabkraft:
 						$$ S_1 = -\frac{1}{4}\cdot F_1 + \frac{1}{2\cdot tan(\alpha)}\cdot F_2 $$
 				</p>
+				\( \blacksquare \)
+			</div>
+		</div>
+		<!-- E-Test 3 -->
+		<div class="mSection">
+			<div class="mSubsection">
+				<p><b>E-Test 3</b></p>
+				<p><a href="media/TM1_ETest_3.png" target="_blank"><img src="media/TM1_ETest_3.png" onload="mResizeImg(this);" border="1" /></a></p>
+			</div>
+		</div>
+		<div class="mSection">
+			<div class="mSubsection">
+				<b>Lösung:</b>
+				<p>
+					<form id="frm_TM1_ETest_3" name="frm_TM1_ETest_3" style="width: 380px; background-color: rgba(80,80,80,.2); padding: 1px 8px 8px 8px;">
+						<p>Tool zum Berechnen des Schnittmoments \( M(x) \):</p>
+						<label>\( q_0 \) : &nbsp;</label><input name="frm_TM1_ETest_3_q0" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" /> kN/m
+						<input class="mButton" type="button" value="Reset" onclick="mTools().etest3().reset()" /><br />
+						<label>\( l \) : &nbsp;&nbsp;&nbsp;&nbsp;</label><input name="frm_TM1_ETest_3_l" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" /> m &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input class="mButton" type="button" value="Löschen" onclick="mTools().clear(this)" /><br />
+						<label>\( n \) : &nbsp;&nbsp;&nbsp;</label><input name="frm_TM1_ETest_3_n" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" /><br />
+						<label>\( x \) : &nbsp;&nbsp;&nbsp;</label><input name="frm_TM1_ETest_3_x" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" />\( \;\cdot\; l\, \) &nbsp;&nbsp;&nbsp;
+						<input class="mButton" type="button" value="Rechnen" onclick= "mTools().etest3().calc()" /><br />
+						<hr />
+						<label>\( M \) : &nbsp;</label><input name="frm_TM1_ETest_3_M" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> kNm<br />
+					</form>
+					<script type="text/javascript">mTools().etest3().reset();</script>
+				</p>
+				<p>
+					$$
+						M(x) = (x_s - x) \cdot R(x) = -\frac{x^{n+2}}{(n+1)\cdot(n+2)}\cdot\frac{q_0}{l^n}
+					$$
+					wobei $$ R(x) = \frac{q_0}{l^n}\cdot \frac{x^{n+1}}{n+1} $$ die <span style="color:red;">Resultierende</span> 
+					der Last von Stelle \( 0 \) bis zur	Schnittstelle \( x = 0,72\cdot l \) ist und 
+					$$ x_s = \frac{n+1}{n+2}\cdot x $$ die x-Koordinate des <span style="color:red;">Schwerpunkts</span> der Last 
+					von Stelle \( 0 \) bis zur	Schnittstelle \( x = 0,72\cdot l \).
+				</p>
+				\( \blacksquare \)
 			</div>
 		</div>
 	</div>
