@@ -192,6 +192,43 @@
 				};
 			}, // uebung1_3
 		};
+	} // mTools
+	
+	/*
+	 * Returns the x- and y-coordinate of a pixel/point on screen/window by mouse click.
+	 */
+	function mGetMousePosition (evt) {
+		/* https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollX
+		 * scrollX gibt den Wert des (verschieblichen) Scrollbars. Wenn der Screen/Window-Bereich nach links/rechts gescrollt wird,
+		 * aendert sich der scrollX-Wert. Wenn es kein Scrollbar gibt, ist scrollX immer 0. Analog fuer scrollY.
+		 *
+		 * pageXOffset ist Alias von scrollX -->  ( pageXOffset == scrollX)
+		 * 
+		 * Wenn (window.pageXOffset) bzw. (window.scrollX) nicht existiert, dann verwendet (document.documentElement.scrollLeft).
+		 *
+		 * https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientX
+		 * clientX gibt die X-Koordinate des Mouse im SICHTBAREN ScreenWindow-Bereich an. Klickt man z.B. auf eine Stelle x und 
+		 * die Koordinate clientX=12 erhaelt. Dann scrollt man nach rechts um scrollX=100px. Anschliessend klickt man im
+		 * SICHTBAREN Screen/Window-Bereich wieder auf dieselbe Stelle x, erhaelt man ueberraschenderweise dieselbe Koordinate
+		 * clientX=12, und NICHT clientX=(12 + scrollX). Analog fuer clientY.
+		 *
+		 * Um die tatsaechliche X-Koordinate zu ermitteln, werden scrollX und clientX miteinander addiert:
+		 *		var x = scrollX + clientX;
+		 * Fuer Cross-Browserkompatibilitaet ersetzt scrollX durch pageXOffset:
+		 *		var x = pageXOffset + clientX;
+		 * Ausfuehrlicher sieht es wie folgt:
+		 *		var x = window.pageXOffset + event.clientX;
+		 * bzw.
+		 *		var x = ( window.pageXOffset || document.documentElement.scrollLeft ) + event.clientX;
+		 */
+		var x = window.pageXOffset || ( document.documentElement || document.body.parentNode || document.body ).scrollLeft;
+		x += evt.clientX;
+		
+		var y = window.pageYOffset || ( document.documentElement || document.body.parentNode || document.body ).scrollTop;
+		y+= evt.clientY;
+		
+		console.log("x: " + x + ", y: " + y + ", pageXOffset: " + window.pageXOffset + ", pageYOffset: " + window.pageYOffset + ", event.clientX: " + evt.clientX + ", event.clientY: " + evt.clientY + ", document.documentElement.scrollLeft: " + document.documentElement.scrollLeft);		
+		return {x,y};
 	}
 	
 	/*
@@ -212,7 +249,8 @@
 				window.location.reload(false);
 			}
 		}
-	}
+	} // mRefreshPage
+	
 	/*
 	 * Provides the current window size. If the window is resized by the user,
 	 * this function also returns the updated window/screen size.
@@ -255,7 +293,7 @@
 		for ( var i = rootNode.childNodes.length-1; i >= 0; i-- ) {
 			var node = rootNode.childNodes[i];
 			if ( node.scrollHeight && node.clientHeight ) {
-				var nodeHeight = Math.max(node.scrollHeight, node.clientHeight);
+				var nodeHeight = node.scrollHeight + node.clientHeight; //Math.max(node.scrollHeight, node.clientHeight);
 				// Update mHeight
 				mHeight = Math.max(nodeHeight, startHeight);
 			}
@@ -283,7 +321,7 @@
 			strStyle = "box-shadow: 0 0 4px rgba(30,30,30,.6);";
 			strStyle += "width:" + (windowSize.width / 1.6) + "px;";
 		}
-		strStyle += "height:" + mGetPageHeight()*1.5 + "px;"; // factor 1.5
+		strStyle += "height:" + mGetPageHeight()*1.3 + "px;";
 		document.getElementById("mPage").setAttribute("style", strStyle);
 	}
 	
