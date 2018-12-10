@@ -26,17 +26,13 @@ var Objekt = function (/* double[3], vektor */ position, /* string */ bezeichnun
 	}
 };
 
-Objekt.prototype.getBezeichnung = function () {
-	return this.bezeichnung;
-};
-
-Objekt.prototype.setBezeichnung = function (/* string */ bezeichnung) {
-	this.bezeichnung = bezeichnung;
-};
-
-Objekt.prototype.setPosition = function (/* double[3], vektor */ position) {
-	ArrayDeepCopy(position, this.position);
-};
+Objekt.prototype.getBezeichnung = function () { return this.bezeichnung; };
+Objekt.prototype.getPosition = function () { return this.position; };
+Objekt.prototype.getX = function () { return this.position[0]; };
+Objekt.prototype.getY = function () { return this.position[1]; };
+Objekt.prototype.getZ = function () { return this.position[2]; };
+Objekt.prototype.setBezeichnung = function (/* string */ bezeichnung) {	this.bezeichnung = bezeichnung; };
+Objekt.prototype.setPosition = function (/* double[3], vektor */ position) { ArrayDeepCopy(position, this.position); };
 
 //===============================================================================================================
 /*
@@ -63,22 +59,41 @@ Kraft.prototype.constructor = Kraft;
 /*
  * Methods of 'Kraft'
  */
-Kraft.prototype.getBetrag = function () {
-	return this.betrag;
-};
+Kraft.prototype.getBetrag = function () { return this.betrag; };
+Kraft.prototype.setAngriffspunkt = function (/* double[3], vektor */ angriffspunkt) { this.setPosition(angriffspunkt); };
+Kraft.prototype.setBetrag = function (/* double */ betrag) { this.betrag = betrag; };
+Kraft.prototype.setRichtung = function (/* double[3], vektor */ richtung) {	ArrayDeepCopy(richtung, this.richtung); };
 
-Kraft.prototype.setAngriffspunkt = function (/* double[3], vektor */ angriffspunkt) {
-	this.setPosition(angriffspunkt);
+//===============================================================================================================
+/*
+ * Constructor 'Moment'. Inherits from 'Objekt'.
+ * @param: 
+ *		drehrichtung : +1 (positiv, gegen Uhrzeigersinn), -1 (negativ, in Uhrzeigersinn)
+ */
+var Moment = function (/* double */ betrag, /* short int */ drehrichtung, /* double[3], vektor */ position, /* string */ bezeichnung) {
+	this.betrag = 0; this.drehrichtung = 1; // default
+	var argc = arguments.length;
+	if ( argc == 0 ) {
+		// Call the root/parent constructor 'Objekt'. That 'this' is the current 'Kraft' object which calls its parent (Objekt).
+		Objekt.call(this);
+	}
+	else {
+		this.betrag = betrag;
+		if ( argc == 1 ) Objekt.call(this);
+		else {
+			this.drehrichtung = drehrichtung;
+			( argc == 2 ) ? Objekt.call(this) : ( argc == 3 ) ? Objekt.call(this, position) : Objekt.call(this, position, bezeichnung);
+		}
+	}
 };
+Moment.prototype = Object.create(Objekt);
+Moment.prototype.constructor = Moment;
 
-Kraft.prototype.setBetrag = function (/* double */ betrag) {
-	this.betrag = betrag;
-};
-
-Kraft.prototype.setRichtung = function (/* double[3], vektor */ richtung) {
-	ArrayDeepCopy(richtung, this.richtung);
-};
-
+Moment.prototype.getBetrag = function () { return this.betrag; };
+Moment.prototype.getDrehrichtung = function () { return this.drehrichtung; };
+Moment.prototype.setBetrag = function (betrag) { this.betrag = betrag; };
+Moment.prototype.setDrehrichtung = function (drehrichtung) { this.drehrichtung = drehrichtung; };
+ 
 //===============================================================================================================
 /*
  * Constructor 'Auflager'. Inherits from 'Objekt'.
@@ -99,17 +114,12 @@ Auflager.prototype.constructor = Auflager;
 /*
  * Methods for 'Auflager'
  */
-Auflager.prototype.getWertigkeit = function () {
-	return this.wertigkeit;
-};
-
-Auflager.prototype.setWertigkeit = function (/* unsigned short int */ wertigkeit) {
-	this.wertigkeit = wertigkeit;
-};
+Auflager.prototype.getWertigkeit = function () { return this.wertigkeit; };
+Auflager.prototype.setWertigkeit = function (/* unsigned short int */ wertigkeit) { this.wertigkeit = wertigkeit; };
 
 //===============================================================================================================
 /*
- * (Child) constructor 'Loslager' of parent 'Auflager'.
+ * Child constructor 'Loslager' of parent 'Auflager'.
  */
 var Loslager = function (/* double[3], vektor */ position, /* string */ bezeichnung) { // Loslager ist querverschieblich
 	if ( arguments.length == 0 ) {
@@ -119,10 +129,13 @@ var Loslager = function (/* double[3], vektor */ position, /* string */ bezeichn
 	else { // arguments.length >= 1
 		( arguments.length == 1 ) ? Auflager.call(this, 1, position) : Auflager.call(this, 1, position, bezeichnung);
 	}
-	this.kraft = new Kraft(0, [0,0,0], position, bezeichnung);
+	this.kraft = new Kraft(1, [0,1,0], position, bezeichnung); // vertikale Kraft
 };
 Loslager.prototype = Object.create(Auflager);  // Subclass 'Loslager' inherits from parent class 'Auflager'
 Loslager.prototype.constructor = Loslager;
+
+Loslager.prototype.getKraft = function () {	return this.kraft; };
+Loslager.prototype.getKraftbetrag = function () { return this.kraft.getBetrag(); };
 
 //===============================================================================================================
 /*
@@ -130,25 +143,49 @@ Loslager.prototype.constructor = Loslager;
  */
 var Festlager = function (/* double[3], vektor */ position, /* string */ bezeichnung) {
 	if ( arguments.length == 0 ) {
-		// Call the parent constructor (Auflager). That 'this' is the current Loslager object which calls its parent (Auflager) and assigns the 'wertigkeit' value 1.
+		// Call the parent constructor (Auflager). That 'this' is the current Festlager object which calls its parent (Auflager) and assigns the 'wertigkeit' value 2.
 		Auflager.call(this, 2);
 	}
 	else { // arguments.length >= 1
 		( arguments.length == 1 ) ? Auflager.call(this, 2, position) : Auflager.call(this, 2, position, bezeichnung);
 	}
+	this.kraftHorizontal = new Kraft(1, [1,0,0], position, bezeichnung + "_H"); // horizontale Kraft
+	this.kraftVertikal = new Kraft(1, [0,1,0], position, bezeichnung + "_V"); // vertikale Kraft
 };
 Festlager.prototype = Object.create(Auflager);  // Subclass 'Festlager' inherits from parent class 'Auflager'
 Festlager.prototype.constructor = Festlager;
+
+Festlager.prototype.getKraftHorizontal = function () { return this.kraftHorizontal; };
+Festlager.prototype.getKraftVertikal = function () { return this.kraftVertikal; };
+Festlager.prototype.getKraftHorizontalBetrag = function () { return this.kraftHorizontal.getBetrag(); };
+Festlager.prototype.getKraftVertikalBetrag = function () { return this.kraftVertikal.getBetrag(); };
 
 //===============================================================================================================
 /*
  * Child constructor 'Einspannung' of parent 'Auflager'.
  */
-var Einspannung = function () {};
+var Einspannung = function (/* double[3], vektor */ position, /* string */ bezeichnung) {
+	if ( arguments.length == 0 ) {
+		// Call the parent constructor (Auflager). That 'this' is the current Einspannung object which calls its parent (Auflager) and assigns the 'wertigkeit' value 3.
+		Auflager.call(this, 3);
+	}
+	else { // arguments.length >= 1
+		( arguments.length == 1 ) ? Auflager.call(this, 3, position) : Auflager.call(this, 3, position, bezeichnung);
+	}
+	this.kraftHorizontal = new Kraft(1, [1,0,0], position, bezeichnung + "_H"); // horizontale Kraft
+	this.kraftVertikal = new Kraft(1, [0,1,0], position, bezeichnung + "_V"); // vertikale Kraft
+	this.moment = new Moment(1, 1, position, "M_" + bezeichnung);
+};
+Einspannung.prototype = Object.create(Auflager);
+Einspannung.prototype.constructor = Einspannung;
+
+Einspannung.prototype.getKraftHorizontal = function () { return this.kraftHorizontal; };
+Einspannung.prototype.getKraftVertikal = function () { return this.kraftVertikal; };
+Einspannung.prototype.getMoment = function () { return this.Moment; };
  
 //===============================================================================================================
 /*
- * Constructor 'Balken'
+ * Constructor 'Balken'. Inherits from 'Objekt'.
  */
 var Balken = function ( /* double */ laenge, /* double[3], vektor */ startPosition, /* string */ bezeichnung) {
 	this.laenge = ( arguments.length == 0 ) ? 0 : laenge;
