@@ -84,13 +84,12 @@ Kraft.prototype.setRichtung = function (/* double[3], vektor */ richtung) {
  * Constructor 'Auflager'. Inherits from 'Objekt'.
  */
 var Auflager = function (/* unsigned short int */ wertigkeit, /* double[3], vektor */ position, /* string */ bezeichnung) {
+	this.wertigkeit = ( arguments.length == 0 ) ? 0 : wertigkeit;
 	if ( arguments.length < 2 ) {
 		// Call the root/parent constructor 'Objekt'. That 'this' is the current 'Auflager' object which calls its parent (Objekt).
 		Objekt.call(this);
-		this.wertigkeit = ( arguments.length == 0 ) ? 0 : wertigkeit;
 	}
 	else {
-		this.wertigkeit = wertigkeit;
 		( arguments.length == 2 ) ? Objekt.call(this, position) : Objekt.call(this, position, bezeichnung);
 	}
 };
@@ -120,6 +119,7 @@ var Loslager = function (/* double[3], vektor */ position, /* string */ bezeichn
 	else { // arguments.length >= 1
 		( arguments.length == 1 ) ? Auflager.call(this, 1, position) : Auflager.call(this, 1, position, bezeichnung);
 	}
+	this.kraft = new Kraft(0, [0,0,0], position, bezeichnung);
 };
 Loslager.prototype = Object.create(Auflager);  // Subclass 'Loslager' inherits from parent class 'Auflager'
 Loslager.prototype.constructor = Loslager;
@@ -142,11 +142,21 @@ Festlager.prototype.constructor = Festlager;
 
 //===============================================================================================================
 /*
+ * Child constructor 'Einspannung' of parent 'Auflager'.
+ */
+var Einspannung = function () {};
+ 
+//===============================================================================================================
+/*
  * Constructor 'Balken'
  */
-var Balken = function ( /* double */ laenge, /* double[3], vektor */ startPosition, /* string */ bezeichnung) {};
+var Balken = function ( /* double */ laenge, /* double[3], vektor */ startPosition, /* string */ bezeichnung) {
+	this.laenge = ( arguments.length == 0 ) ? 0 : laenge;
+	if ( arguments.length < 2 ) { Objekt.call(this); }
+	else { ( arguments.length == 2 ) ? Objekt.call(this, startPosition) : Objekt.call(this, startPosition, bezeichnung); } 
+};
 
-
+//===============================================================================================================
 var F1 = new Kraft();
 F1.setBezeichnung("F1");
 console.log("Kraft: " + F1.getBezeichnung() + " = " + F1.getBetrag());
