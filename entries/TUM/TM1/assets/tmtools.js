@@ -3,200 +3,181 @@
  * Copyright 2018
  */
 
-/*
- * Copy all elements from 'arrSrc' to 'arrDes'
- * @param
- *		srcSrc : Source array which the values will be copied from
- *		srcDes : Destination array which the values will be copied to.
- */
-function ArrayDeepCopy (arrSrc, arrDes) {
-	if ( arrSrc.length != arrDes.length ) return;
-	for ( var i = 0; i < arrSrc.length; i++ ) arrDes[i] = arrSrc[i];
-}
+// Fuer Interface werdem keine Prototyp-Funktionen der Form "<class_name>.prototype.<function_name> = function () {..}"
+// wie { getters, setters } definiert. Alles innerhalb des var-Rumpfes bzw. der var-Klammern {..} (d.h. 
+// var <IName> = function () {..}) sind Properties (Eigenschaften).
 
+//=======================//
+//		Interface        //
+//=======================//
 //===============================================================================================================
-/*
- * (Root/Parent) Constructor 'Objekt' (global)
- */
-var Objekt = function (/* double[3], vektor */ position, /* string */ bezeichnung) {
-	this.position = [0,0,0]; this.bezeichnung = "";
-	if ( arguments.length > 0 ) {
-		ArrayDeepCopy(position, this.position);
-		if ( arguments.length > 1 ) this.bezeichnung = bezeichnung;
-	}
+var IKraft = function (/* float */ betrag) {
+	this.betrag = ( arguments.length != 0 ) ? betrag : 0;
+	this.richtung = { rx : 0, ry : 0, rz : 0 }; // Richtungsvektor
+	// Some properties as functions
+	this.getBetrag = function () { return this.betrag; }; // usage: this.getBetrag()
 };
 
-Objekt.prototype.getBezeichnung = function () { return this.bezeichnung; };
-Objekt.prototype.getPosition = function () { return this.position; };
-Objekt.prototype.getX = function () { return this.position[0]; };
-Objekt.prototype.getY = function () { return this.position[1]; };
-Objekt.prototype.getZ = function () { return this.position[2]; };
-Objekt.prototype.setBezeichnung = function (/* string */ bezeichnung) {	this.bezeichnung = bezeichnung; };
-Objekt.prototype.setPosition = function (/* double[3], vektor */ position) { ArrayDeepCopy(position, this.position); };
-
 //===============================================================================================================
-/*
- * Constructor 'Kraft'. Inherits from 'Objekt'.
- */
-var Kraft = function (/* double */ betrag, /* double[3], vektor */ richtung, /* double[3], vektor */ angriffspunkt, /* string */ bezeichnung) {
-	this.betrag = 0; this.richtung = [0,0,0];
-	if ( arguments.length == 0 ) {
-		// Call the root/parent constructor 'Objekt'. That 'this' is the current 'Kraft' object which calls its parent (Objekt).
-		Objekt.call(this);
-	}
-	else {
-		this.betrag = betrag;
-		if ( arguments.length < 3 ) Objekt.call(this);
-		else {		
-			if ( arguments.length == 3 ) Objekt.call(this, angriffspunkt);
-			else Objekt.call(this, angriffspunkt, bezeichnung);
-		}
-	}
-}; 
-Kraft.prototype = Object.create(Objekt.prototype); // Subclass 'Kraft' inherits from parent class 'Objekt'
-Kraft.prototype.constructor = Kraft;
-
-/*
- * Methods of 'Kraft'
- */
-Kraft.prototype.getBetrag = function () { return this.betrag; };
-Kraft.prototype.setAngriffspunkt = function (/* double[3], vektor */ angriffspunkt) { this.setPosition(angriffspunkt); };
-Kraft.prototype.setBetrag = function (/* double */ betrag) { this.betrag = betrag; };
-Kraft.prototype.setRichtung = function (/* double[3], vektor */ richtung) {	ArrayDeepCopy(richtung, this.richtung); };
-
-//===============================================================================================================
-/*
- * Constructor 'Moment'. Inherits from 'Objekt'.
- * @param: 
- *		drehrichtung : +1 (positiv, gegen Uhrzeigersinn), -1 (negativ, in Uhrzeigersinn)
- */
-var Moment = function (/* double */ betrag, /* short int */ drehrichtung, /* double[3], vektor */ position, /* string */ bezeichnung) {
-	this.betrag = 0; this.drehrichtung = 1; // default
-	var argc = arguments.length;
-	if ( argc == 0 ) {
-		// Call the root/parent constructor 'Objekt'. That 'this' is the current 'Kraft' object which calls its parent (Objekt).
-		Objekt.call(this);
-	}
-	else {
-		this.betrag = betrag;
-		if ( argc == 1 ) Objekt.call(this);
-		else {
-			this.drehrichtung = drehrichtung;
-			( argc == 2 ) ? Objekt.call(this) : ( argc == 3 ) ? Objekt.call(this, position) : Objekt.call(this, position, bezeichnung);
-		}
-	}
+var IMoment = function (/* float */ betrag, /* unsigned short int */ drehsinn) {
+	this.betrag = ( betrag != undefined ) ? betrag : 0;
+	this.drehsinn = ( drehsinn != undefined ) ? drehsinn : 1; // +1 : nach links, -1 nach rechts (drehend)
 };
-Moment.prototype = Object.create(Objekt);
-Moment.prototype.constructor = Moment;
 
-Moment.prototype.getBetrag = function () { return this.betrag; };
-Moment.prototype.getDrehrichtung = function () { return this.drehrichtung; };
-Moment.prototype.setBetrag = function (betrag) { this.betrag = betrag; };
-Moment.prototype.setDrehrichtung = function (drehrichtung) { this.drehrichtung = drehrichtung; };
- 
+
+//=======================//
+//			Class        //
+//=======================// 
 //===============================================================================================================
-/*
- * Constructor 'Auflager'. Inherits from 'Objekt'.
- */
-var Auflager = function (/* unsigned short int */ wertigkeit, /* double[3], vektor */ position, /* string */ bezeichnung) {
-	this.wertigkeit = ( arguments.length == 0 ) ? 0 : wertigkeit;
-	if ( arguments.length < 2 ) {
-		// Call the root/parent constructor 'Objekt'. That 'this' is the current 'Auflager' object which calls its parent (Objekt).
-		Objekt.call(this);
-	}
-	else {
-		( arguments.length == 2 ) ? Objekt.call(this, position) : Objekt.call(this, position, bezeichnung);
-	}
+var Objekt = function () {
+	this.x = 0; this.y = 0; this.z = 0;
 };
-Auflager.prototype = Object.create(Objekt); // Subclass 'Auflager' inherits from parent class 'Objekt'
-Auflager.prototype.constructor = Auflager;
-
-/*
- * Methods for 'Auflager'
- */
-Auflager.prototype.getWertigkeit = function () { return this.wertigkeit; };
-Auflager.prototype.setWertigkeit = function (/* unsigned short int */ wertigkeit) { this.wertigkeit = wertigkeit; };
+// getters, setters (methods)
+Objekt.prototype.getX = function () { return this.x; };
+Objekt.prototype.getY = function () { return this.y; };
+Objekt.prototype.getZ = function () { return this.z; };
+Objekt.prototype.setPosition = function (/* float */ x, /* float */ y, /* float */ z) {
+	this.x = x; this.y = y; this.z = z; 
+};
+Objekt.prototype.setX = function (x) { this.x = x; };
+Objekt.prototype.setY = function (y) { this.y = y; };
+Objekt.prototype.setZ = function (z) { this.z = z; };
 
 //===============================================================================================================
-/*
- * Child constructor 'Loslager' of parent 'Auflager'.
- */
-var Loslager = function (/* double[3], vektor */ position, /* string */ bezeichnung) { // Loslager ist querverschieblich
-	if ( arguments.length == 0 ) {
-		// Call the parent constructor (Auflager). That 'this' is the current Loslager object which calls its parent (Auflager) and assigns the 'wertigkeit' value 1.
-		Auflager.call(this, 1);
-	}
-	else { // arguments.length >= 1
-		( arguments.length == 1 ) ? Auflager.call(this, 1, position) : Auflager.call(this, 1, position, bezeichnung);
-	}
-	this.kraft = new Kraft(1, [0,1,0], position, bezeichnung); // vertikale Kraft
+var Kraft = function (/* float */ betrag) {
+	this.typ = "Kraft";
+	Objekt.call(this); // 'Kraft' uses all properties of 'Objekt'
+	IKraft.call(this, betrag); // 'Kraft' uses all properties of 'IKraft'
 };
-Loslager.prototype = Object.create(Auflager);  // Subclass 'Loslager' inherits from parent class 'Auflager'
+Kraft.prototype = Object.create(Objekt.prototype); // 'Kraft' is subclass of only 'Objekt' and inherits methods 
+Kraft.prototype.constructor = Kraft;               // only from 'Objekt' too
+
+//===============================================================================================================
+var Moment = function (/* float */ betrag, /* unsigned short int */ drehsinn) {
+	this.typ = "Moment";
+	Objekt.call(this);
+	IMoment.call(this, betrag, drehsinn); // 'Moment' uses the properties of 'IMoment'
+};
+Moment.prototype = Object.create(Objekt.prototype); // 'Moment' is subclass of only 'Objekt' and inherits methods
+Moment.prototype.constructor = Moment;              // only from 'Objeckt' too
+
+//===============================================================================================================
+var Komponent = function (/*string */ bezeichnung) {
+	this.bezeichnung = ( bezeichnung != undefined ) ? bezeichnung : "";
+	// Call the parent constructor 'Objekt'. That 'this' is the 'Komponent' object which calls its parent (Objekt).
+	Objekt.call(this); // 'Komponent' uses all properties of 'Objekt'
+};
+Komponent.prototype = Object.create(Objekt.prototype); // subclass 'Komponent' inherits from superclass 'Objekt'.
+Komponent.prototype.constructor = Komponent; // creates constructor 'Komponent'.
+// getters, setters (methods)
+Komponent.prototype.getBezeichnung = function () { return this.bezeichnung; };
+Komponent.prototype.setBezeichnung = function (/* string */ bezeichnung) { this.bezeichnung = bezeichnung; };
+
+
+//===============================================================================================================
+var Lager = function (/* uint */ wertigkeit, /* string */ bezeichnung) {
+	this.typ = "Lager";
+	Komponent.call(this, bezeichnung);
+	this.wertigkeit = ( wertigkeit != undefined ) ? wertigkeit : 0;
+};
+Lager.prototype = Object.create(Komponent.prototype);
+Lager.prototype.constructor = Lager;
+
+//===============================================================================================================
+var Loslager = function Loslager (/* string */ bezeichnung) { // querverschieblich
+	Lager.call(this, 1, bezeichnung);
+	this.typ = "Loslager";
+	this.kraft = new IKraft(0);	
+};
+Loslager.prototype = Object.create(Lager.prototype);
 Loslager.prototype.constructor = Loslager;
 
-Loslager.prototype.getKraft = function () {	return this.kraft; };
-Loslager.prototype.getKraftbetrag = function () { return this.kraft.getBetrag(); };
-
 //===============================================================================================================
-/*
- * Child constructor 'Festlager' of parent 'Auflager'.
- */
-var Festlager = function (/* double[3], vektor */ position, /* string */ bezeichnung) {
-	if ( arguments.length == 0 ) {
-		// Call the parent constructor (Auflager). That 'this' is the current Festlager object which calls its parent (Auflager) and assigns the 'wertigkeit' value 2.
-		Auflager.call(this, 2);
-	}
-	else { // arguments.length >= 1
-		( arguments.length == 1 ) ? Auflager.call(this, 2, position) : Auflager.call(this, 2, position, bezeichnung);
-	}
-	this.kraftHorizontal = new Kraft(1, [1,0,0], position, bezeichnung + "_H"); // horizontale Kraft
-	this.kraftVertikal = new Kraft(1, [0,1,0], position, bezeichnung + "_V"); // vertikale Kraft
+var Festlager = function Loslager (/* string */ bezeichnung) {
+	Lager.call(this, 2, bezeichnung);
+	this.typ = "Festlager";
+	this.kraft = new IKraft(0); // Horizontal
+	this.kraft2 = new IKraft(0); // Vertikal
 };
-Festlager.prototype = Object.create(Auflager);  // Subclass 'Festlager' inherits from parent class 'Auflager'
+Festlager.prototype = Object.create(Lager.prototype);
 Festlager.prototype.constructor = Festlager;
 
-Festlager.prototype.getKraftHorizontal = function () { return this.kraftHorizontal; };
-Festlager.prototype.getKraftVertikal = function () { return this.kraftVertikal; };
-Festlager.prototype.getKraftHorizontalBetrag = function () { return this.kraftHorizontal.getBetrag(); };
-Festlager.prototype.getKraftVertikalBetrag = function () { return this.kraftVertikal.getBetrag(); };
-
 //===============================================================================================================
-/*
- * Child constructor 'Einspannung' of parent 'Auflager'.
- */
-var Einspannung = function (/* double[3], vektor */ position, /* string */ bezeichnung) {
-	if ( arguments.length == 0 ) {
-		// Call the parent constructor (Auflager). That 'this' is the current Einspannung object which calls its parent (Auflager) and assigns the 'wertigkeit' value 3.
-		Auflager.call(this, 3);
-	}
-	else { // arguments.length >= 1
-		( arguments.length == 1 ) ? Auflager.call(this, 3, position) : Auflager.call(this, 3, position, bezeichnung);
-	}
-	this.kraftHorizontal = new Kraft(1, [1,0,0], position, bezeichnung + "_H"); // horizontale Kraft
-	this.kraftVertikal = new Kraft(1, [0,1,0], position, bezeichnung + "_V"); // vertikale Kraft
-	this.moment = new Moment(1, 1, position, "M_" + bezeichnung);
+var Einspannung = function Einspannung (/* string */ bezeichnung) {
+	Einspannung.call(this, 3, bezeichnung);
+	this.typ = "Einspannung";
+	this.kraft = new IKraft(0); // Horizontal
+	this.kraft2 = new IKraft(0); // Vertikal
+	this.moment = new IMoment(0, 1);
 };
-Einspannung.prototype = Object.create(Auflager);
+Einspannung.prototype = Object.create(Lager.prototype);
 Einspannung.prototype.constructor = Einspannung;
 
-Einspannung.prototype.getKraftHorizontal = function () { return this.kraftHorizontal; };
-Einspannung.prototype.getKraftVertikal = function () { return this.kraftVertikal; };
-Einspannung.prototype.getMoment = function () { return this.Moment; };
- 
 //===============================================================================================================
-/*
- * Constructor 'Balken'. Inherits from 'Objekt'.
- */
-var Balken = function ( /* double */ laenge, /* double[3], vektor */ startPosition, /* string */ bezeichnung) {
-	this.laenge = ( arguments.length == 0 ) ? 0 : laenge;
-	if ( arguments.length < 2 ) { Objekt.call(this); }
-	else { ( arguments.length == 2 ) ? Objekt.call(this, startPosition) : Objekt.call(this, startPosition, bezeichnung); } 
+var Balken = function ( /* double */ laenge, /* string */ bezeichnung) {
+	Komponent.call(this, bezeichnung);
+	this.typ = "Balken";
+	this.laenge = ( laenge != undefined ) ? laenge : 0;
+};
+Balken.prototype = Object.create(Komponent.prototype);
+Balken.prototype.constructor = Balken;
+
+//===============================================================================================================
+var System = function () {
+	Objekt.call(this);
+	this.Components = [];
+	this.Components.add = function (c) { this.push(c); };
+	this.validate = function () {
+		if ( this.Components.length != 0 ) {
+			// Gleichgewichtsbedingung: ->
+			this.Components.forEach(function (c) {
+				switch (c.typ) {
+					case Festlager:
+						break;
+					default:
+						break;
+				}
+			});
+			//                          ^
+			// Gleichgewichtsbedingung: |
+			this.Components.forEach(function (c) {
+				switch (c.typ) {
+					case 
+				}
+			});
+		}
+	};
 };
 
 //===============================================================================================================
-var F1 = new Kraft();
-F1.setBezeichnung("F1");
-console.log("Kraft: " + F1.getBezeichnung() + " = " + F1.getBetrag());
-
-var F2 = new Kraft(3, [1,1,1], [2,2,2], "F2");
-console.log("Kraft: " + F2.getBezeichnung() + " = " + F2.getBetrag());
+var C1 = new Komponent();
+console.log("C1.x : " + C1.x);
+C1.setPosition(1,2,3);
+console.log("C1.setPosition(1,2,3)");
+console.log("C1.x : " + C1.x);
+var F1 = new Kraft(3);
+console.log("var F1 = new Kraft(3)");
+console.log("Kraft F1.y : " + F1.y);
+F1.setPosition(1,2,3);
+console.log("F1.setPosition(1,2,3)");
+console.log("Kraft F1.y : " + F1.y);
+console.log("Kraft F1.getY() : " + F1.getY());
+console.log("Kraft F1.betrag : " + F1.betrag);
+console.log("Kraft F1.getBetrag() : " + F1.getBetrag());
+console.log("Kraft F1.richtung.rx : " + F1.richtung.rx);
+F1.richtung.x = 1;
+console.log("Kraft F1.richtung.rx : " + F1.richtung.rx);
+var M1 = new Moment();
+console.log("var M1 = new Moment()");
+console.log("M1.x : " + M1.x);
+console.log("M1.drehsinn : " + M1.drehsinn);
+var A = new Loslager();
+console.log("var A = new Loslager()");
+console.log("Loslager A.x : " + A.x);
+console.log("Loslager A.bezeichnung : " + A.bezeichnung);
+console.log("Loslager A.getBezeichnung() : " + A.getBezeichnung());
+A.setBezeichnung("A");
+console.log("Loslager A.bezeichnung : " + A.bezeichnung);
+console.log("Loslager A.getBezeichnung() : " + A.getBezeichnung());
+console.log("typeof A : " + (typeof A) );
+console.log("A.typ : " + A.typ );
