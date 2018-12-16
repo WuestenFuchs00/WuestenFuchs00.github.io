@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/style.css">
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 	<script language="javascript" type="text/javascript" src="assets/script.js"></script>
+	<script language="javascript" type="text/javascript" src="assets/MathTools.js"></script>
 	<script language="javascript" type="text/javascript" src="assets/tmtools.js"></script>
 	<title>Technische Mechanik I</title>
 <body>
@@ -27,5 +28,57 @@
 	</div>
 	<div id="mFooter"></div>
 </div>
+<script type="text/javascript">
+//===============================================================================================================
+var C1 = new Komponent();
+console.log("C1.x : " + C1.x);
+C1.setPosition(1,2,3);
+console.log("C1.setPosition(1,2,3)");
+console.log("C1.x : " + C1.x);
+var F1 = new Kraft(3);
+console.log("var F1 = new Kraft(3)");
+console.log("Kraft F1.y : " + F1.y);
+F1.setPosition(1,2,3);
+console.log("F1.setPosition(1,2,3)");
+console.log("Kraft F1.y : " + F1.y);
+console.log("Kraft F1.getY() : " + F1.getY());
+console.log("Kraft F1.betrag : " + F1.betrag);
+console.log("Kraft F1.getBetrag() : " + F1.getBetrag());
+console.log("Kraft F1.richtung.rx : " + F1.richtung.rx);
+F1.richtung.x = 1;
+console.log("Kraft F1.richtung.rx : " + F1.richtung.rx);
+var M1 = new Moment();
+console.log("var M1 = new Moment()");
+console.log("M1.x : " + M1.x);
+console.log("M1.drehsinn : " + M1.drehsinn);
+var A = new Loslager();
+console.log("var A = new Loslager()");
+console.log("Loslager A.x : " + A.x);
+console.log("Loslager A.bezeichnung : " + A.bezeichnung);
+console.log("Loslager A.getBezeichnung() : " + A.getBezeichnung());
+A.setBezeichnung("A");
+console.log("Loslager A.bezeichnung : " + A.bezeichnung);
+console.log("Loslager A.getBezeichnung() : " + A.getBezeichnung());
+console.log("typeof A : " + (typeof A) );
+console.log("A.typ : " + A.typ );
+console.log("Create an 2-dim array");
+var arr = m_Werkzeug().createArray(2,3);
+console.log("var arr = m_Werkzeug().createArray(2,3);");
+console.log("arr.length : " + arr.length);
+console.log("arr[0].length : " + arr[0].length);
+console.log("arr[0][0] = " + (arr[0][0] == undefined));
+console.log("===========================================");
+var str = 2;
+console.log(typeof str);
+console.log("var Gerade = new Mathx.Algebra.Line(1,0)");
+var Gerade = new Mathx.Algebra.Line(1,0);
+console.log("Gerade.m : " + Gerade.m);
+var P1 = new Objekt();
+var P2 = new Objekt();
+P1.x = 1; P1.y = 3;
+P2.x = 3; P2.y = 2;
+var Gerade2 = Mathx.Algebra.build_line_equation(P1,P2);
+console.log("Gerade2.m : " + Gerade2.m);
+</script>
 </body>
 </html>

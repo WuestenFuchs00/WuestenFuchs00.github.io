@@ -3,7 +3,7 @@
  * Copyright 2018
  */
 
-var m_Baukasten = function () {
+var m_Werkzeug = function () {
 	return {
 		/*
  		 * Creates a multi-dimensional array.
@@ -194,7 +194,7 @@ var System = function () {
 	this.Components.add = function (c) { this.push(c); };
 	this.r = 0; // Anzahl der Unbekannten bzw. Lagerreaktionen
 	this.g = 0; // Anzahl der Bindungselemente
-	this.v = 0; // Anzahl der Bindungen, d.h. v = k*g, wobei k die Anzahl der Bindungsmöglichkeiten von jedem g ist.
+	this.v = 0; // Anzahl der Bindungen, d.h. v = k*g, wobei k die Anzahl der Bindungsmoeglichkeiten von jedem g ist.
 	this.n = 0; // Anzahl der (Teil-)Koerpern im System
 	this.getAnzahlLagerrekationen = function () {
 		if ( this.r != 0 ) return this.r;
@@ -210,7 +210,7 @@ var System = function () {
 	this.validate = function () {
 		if ( this.Components.length != 0 ) {
 			// Matrix der Gleichgewichtsbedingungen
-			var MM = m_Baukasten().createMatrix(this.r, this.r);
+			var MM = m_Werkzeug().createMatrix(this.r, this.r);
 			// Fallunterscheidungen
 			Fall_1(this.Components, this.r, MM);
 		}
@@ -218,11 +218,11 @@ var System = function () {
 };
 
 /*
- * Fall_2 : Balken, Loslager/Festlager, externe Kräfte, Last
+ * Fall_2 : Balken, Loslager/Festlager, externe Kraefte, Last
  */
  
 /*
- * Fall_1 : Balken, Loslager/Festlager, externe Kräfte 
+ * Fall_1 : Balken, Loslager/Festlager, externe Kraefte 
  */
 var Fall_1 = function (Components, /* #Lagerreaktionen*/ r, /* Matrix */ MM) {
 	var mm_row = 0, mm_col = 0, vIndex = 0;
@@ -236,10 +236,13 @@ var Fall_1 = function (Components, /* #Lagerreaktionen*/ r, /* Matrix */ MM) {
 				MM[mm_row][mm_col] = 0;
 				break;
 			case "Festlager":
-				MM[mm_row][mm_col] = c.kraft.richtung.vx;
+				MM[mm_row][mm_col++] = c.kraft.richtung.vx;
+				MM[mm_row][mm_col] = 0;
 				break;
 			case "Einspannung":
-				MM[mm_row][mm_col] = c.kraft.richtung.vx;
+				MM[mm_row][mm_col++] = c.kraft.richtung.vx;
+				MM[mm_row][mm_col++] = 0;
+				MM[mm_row][mm_col] = 0;
 				break;
 			case "Kraft":
 				Vk[vIndex] += c.kraft.richtung.vx * c.kraft.betrag;
@@ -250,6 +253,8 @@ var Fall_1 = function (Components, /* #Lagerreaktionen*/ r, /* Matrix */ MM) {
 		mm_col += 1;
 	});
 	mm_row += 1;
+	vIndex += 1;
+	if ( vIndex == r ) return true;
 	// Gleichgewichtsbedingung: Vertikal
 	Components.forEach(function (c) {
 		switch (c.typ) {
@@ -257,56 +262,48 @@ var Fall_1 = function (Components, /* #Lagerreaktionen*/ r, /* Matrix */ MM) {
 				MM[mm_row][mm_col] = c.kraft.richtung.vy;
 				break;
 			case "Festlager":
-				MM[mm_row][mm_col] = c.kraft.richtung.vx;
+				MM[mm_row][mm_col++] = 0;
+				MM[mm_row][mm_col] = c.kraft.richtung.vy;
 				break;
 			case "Einspannung":
-				MM[mm_row][mm_col] = c.kraft.richtung.vx;
+				MM[mm_row][mm_col++] = 0;
+				MM[mm_row][mm_col++] = c.kraft.richtung.vy;
+				MM[mm_row][mm_col] = 0;
 				break;
 			case "Kraft":
-				Vk[vIndex] += c.kraft.richtung.vx * c.kraft.betrag;
+				Vk[vIndex] += c.kraft.richtung.vy * c.kraft.betrag;
 				break;
 			default:
 				break;
 		}
 		mm_col += 1;
 	});
+	mm_row += 1;
+	vIndex += 1;
+	if ( vIndex == r ) return true;
+	// Momentengleichung
+	var Arr_Loslager = [], Arr_Festlager = [], Arr_Einspannung = [], Arr_Kraft = [];
+	Components.forEach(function (c) {
+		switch (c.typ) {
+			case "Loslager":
+				Arr_Loslager.push(c);
+				break;
+			case "Festlager":
+				Arr_Festlager.push(c);
+				break;
+			case "Einspannung":
+				Arr_Einspannung.push(c);
+				break;
+			case "Kraft":
+				Arr_Kraft.push(c);
+				break;
+			default:
+				break;
+		}
+	});
+	var Bezugspunkt = null;
+	while ( Arr_Einspannung.length > 0 && vIndex < r-1 ) {
+		Bezugspunkt = Arr_Einspannung.pop(c);
+		
+	}
 };
-
-//===============================================================================================================
-var C1 = new Komponent();
-console.log("C1.x : " + C1.x);
-C1.setPosition(1,2,3);
-console.log("C1.setPosition(1,2,3)");
-console.log("C1.x : " + C1.x);
-var F1 = new Kraft(3);
-console.log("var F1 = new Kraft(3)");
-console.log("Kraft F1.y : " + F1.y);
-F1.setPosition(1,2,3);
-console.log("F1.setPosition(1,2,3)");
-console.log("Kraft F1.y : " + F1.y);
-console.log("Kraft F1.getY() : " + F1.getY());
-console.log("Kraft F1.betrag : " + F1.betrag);
-console.log("Kraft F1.getBetrag() : " + F1.getBetrag());
-console.log("Kraft F1.richtung.rx : " + F1.richtung.rx);
-F1.richtung.x = 1;
-console.log("Kraft F1.richtung.rx : " + F1.richtung.rx);
-var M1 = new Moment();
-console.log("var M1 = new Moment()");
-console.log("M1.x : " + M1.x);
-console.log("M1.drehsinn : " + M1.drehsinn);
-var A = new Loslager();
-console.log("var A = new Loslager()");
-console.log("Loslager A.x : " + A.x);
-console.log("Loslager A.bezeichnung : " + A.bezeichnung);
-console.log("Loslager A.getBezeichnung() : " + A.getBezeichnung());
-A.setBezeichnung("A");
-console.log("Loslager A.bezeichnung : " + A.bezeichnung);
-console.log("Loslager A.getBezeichnung() : " + A.getBezeichnung());
-console.log("typeof A : " + (typeof A) );
-console.log("A.typ : " + A.typ );
-console.log("Create an 2-dim array");
-var arr = m_Baukasten().createArray(2,3);
-console.log("var arr = m_Baukasten().createArray(2,3);");
-console.log("arr.length : " + arr.length);
-console.log("arr[0].length : " + arr[0].length);
-console.log("arr[0][0] = " + (arr[0][0] == undefined));
