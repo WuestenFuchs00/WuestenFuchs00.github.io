@@ -183,6 +183,38 @@
 				\( \blacksquare \)
 			</div>
 		</div>
+		<!-- E-Test 4 -->
+		<div class="mSection">
+			<div class="mSubsection">
+				<p><b>E-Test 4</b></p>
+				<p><a href="media/TM1_ETest_4.png" target="_blank"><img src="media/TM1_ETest_4.png" onload="mResizeImg(this);" border="1" height="99%" width="99%"/></a></p>
+			</div>
+		</div>
+		<div class="mSection">
+			<div class="mSubsection">
+				<b>Lösung:</b>
+				<p>
+					<form id="frm_TM1_ETest_4" name="frm_TM1_ETest_4" style="width: 380px; background-color: rgba(80,80,80,.2); padding: 1px 8px 8px 8px;">
+						<p>Tool zum Berechnen des Schnittmoments \( M(x) \):</p>
+						<label>\( F \) : &nbsp;</label><input name="frm_TM1_ETest_4_F" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" /> kN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input class="mButton" type="button" value="Reset" onclick="mTools().etest4().reset()" /><br />
+						<label>\( l \) : &nbsp;&nbsp;&nbsp;</label><input name="frm_TM1_ETest_4_l" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" /> m &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input class="mButton" type="button" value="Löschen" onclick="mTools().clear(this)" /><br />
+						<label>\( x \) : &nbsp;&nbsp;</label><input name="frm_TM1_ETest_4_x" class="mTextRight" type="text" minlength="4" maxlength="8" size="8" />\( \;\cdot\; l\, \) &nbsp;&nbsp;&nbsp;
+						<hr />
+						<label>\( M \) : &nbsp;</label><input name="frm_TM1_ETest_4_M" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> kNm
+						<input class="mButton" type="button" value="Rechnen" onclick= "mTools().etest4().calc()" /><br />
+					</form>
+					<script type="text/javascript">mTools().etest4().reset();</script>
+				</p>
+				<p>
+					$$
+						M(x) = - \sqrt{2}\cdot F\cdot x + 2 \cdot l \cdot F
+					$$
+				</p>
+				\( \blacksquare \)
+			</div>
+		</div>
 	</div>
 	<div id="mFooter"></div>
 </div>

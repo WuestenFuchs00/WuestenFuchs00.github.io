@@ -1,5 +1,6 @@
 /**
  * script.js
+ * Copyright 2018
  */
 
 	var g = {
@@ -164,6 +165,29 @@
 					}, // calc
 				}
 			}, // etest3
+			etest4 : function () {
+				var mE4_frm = document.frm_TM1_ETest_4,
+					mE4_M = mE4_frm.frm_TM1_ETest_4_M,
+					mE4_F = mE4_frm.frm_TM1_ETest_4_F,
+					mE4_l = mE4_frm.frm_TM1_ETest_4_l,
+					mE4_x = mE4_frm.frm_TM1_ETest_4_x;
+				return {
+					reset : function () {
+						mE4_F.value = "62,3";
+						mE4_l.value = "3,2";
+						mE4_x.value = "0,2";
+					}, // reset
+					calc : function () {
+						mE4_F = parseFloat(mTools().replaceCommaByDot(mE4_F.value));
+						mE4_l = parseFloat(mTools().replaceCommaByDot(mE4_l.value));
+						mE4_x = parseFloat(mTools().replaceCommaByDot(mE4_x.value));
+						
+						var M = mE4_F * mE4_l * (2 - Math.sqrt(2) * mE4_x);
+						M =  mTools().round(M,1); // Auf eine Nachkommastelle runden						
+						mE4_M.value = mTools().formatResult(M);
+					}, // calc
+				}
+			}, // etest4
 			/*
 			 *
 			 */
