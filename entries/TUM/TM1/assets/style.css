@@ -13,7 +13,7 @@ div#mContent > h2 { margin: 18px 6px; font-family: 'Montserrat', sans-serif; fon
 /*============================================================================================================*/
 div.mToc { margin: -20px 0 50px 0; }
 div.mToc > ol { counter-reset: li; list-style: none; *list-style: decimal; }
-div.mToc > ol > li { margin: 11px; width: 350px; }
+div.mToc > ol > li { margin: 11px; width: 260px; }
 div.mToc > ol > li a:hover { transform: scale(1.05); background-color: #f2ecec; color: red; }
 div.mToc > ol > li a:before { position: relative; content: counter(li); counter-increment: li; padding: 6px 10px 6px 10px; 
 							left: -12px; background-color: #f9340a; border-radius: 14px; color: #fff; 
