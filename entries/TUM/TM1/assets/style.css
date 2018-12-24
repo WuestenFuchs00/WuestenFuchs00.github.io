@@ -11,7 +11,7 @@ div#mHeaderTitle {
 div#mHeaderTitle a:visited { color: #fff; }
 div#mContent > h2 { margin: 18px 6px; font-family: 'Montserrat', sans-serif; font-size: 30px; }
 /*============================================================================================================*/
-div.mToc { margin: 0 0 50px 0; }
+div.mToc { margin: -20px 0 50px 0; }
 div.mToc > ol { counter-reset: li; list-style: none; *list-style: decimal; }
 div.mToc > ol > li { margin: 11px; width: 350px; }
 div.mToc > ol > li a:hover { transform: scale(1.05); background-color: #f2ecec; color: red; }
@@ -22,7 +22,7 @@ div.mToc > ol > li a { display: block; padding: 3px; border-radius: 12px; transi
 					background-color: #e0dddd; color: #000; box-shadow: 2px 2px 3px #878785; }
 /*============================================================================================================*/
 div.mSection {margin-top: 10px; padding: 1px 6px 10px 6px; font-family: 'Roboto'; }
-div.mSection:nth-child(2n+1) { background-color: rgba(10,109,221,.2); }
+div.mSection:nth-child(2n) { background-color: rgba(10,109,221,.2); }
 form input.mTextRight { text-align: right; }
 form input.mTextRight.readOnly { background-color: rgba(80,80,80,.1); }
 form input.mButton { margin-left: 20px; height: 24px; width: 80px; }
