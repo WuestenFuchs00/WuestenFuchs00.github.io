@@ -4,7 +4,9 @@
  */
 
 	var g = {
+		ImgScaleFactor : 1.6,
 		pageWidth : 820, // px
+		pageContentWidth : 0,
 	};
 	
 	function mTools () {
@@ -332,19 +334,22 @@
 		var imgWidth = o.getBoundingClientRect().width,
 			imgHeight = o.getBoundingClientRect().height;
 		// Calculate (new) image size, related to (current) window size
-		var offset = 5*6; // from css style mSection, padding left/right, factor 5x
+		var offset = 5 * 6; // from css style mSection, padding left/right, factor 5x
 		var windowSize = mGetWindowSize();
-		var newImgWidth;
-		if ( windowSize.width >= g.pageWidth ) {
+		var newImgWidth = 0;
+		/*if ( windowSize.width >= g.pageWidth ) {
 			newImgWidth = ( imgWidth >= g.pageWidth ) ? g.pageWidth : imgWidth;
 		} else {
 			newImgWidth = ( imgWidth >= windowSize.width ) ? windowSize.width : imgWidth;
-		}
+		}*/
+		newImgWidth = ( imgWidth >= g.pageContentWidth ) ? g.pageContentWidth : imgWidth;
 		newImgWidth -= offset;
 		var newImgHeight = ( imgWidth > windowSize.width ) ? (imgHeight / imgWidth) * newImgWidth : imgHeight;
-		// Set image size
-		o.setAttribute("style","width:" + newImgWidth + "px");
-		o.setAttribute("style","height:" + newImgHeight + "px");
+		// Set image size. Call the same commands 2x to make sure that changes are really done.
+		o.setAttribute("style","height:" + newImgHeight + "px;");
+		o.setAttribute("style","width:" + newImgWidth + "px;");
+		o.setAttribute("style","height:" + newImgHeight + "px;");
+		o.setAttribute("style","width:" + newImgWidth + "px;");
 	}
 	
 	/*
@@ -379,12 +384,13 @@
 	function mResizeScreen() {
 		var windowSize = this.mGetWindowSize();
 		var strStyle = "";
+		g.pageContentWidth = ( windowSize.width > g.pageWidth ) ? windowSize.width / g.ImgScaleFactor : windowSize.width;
 		if ( windowSize.width > g.pageWidth ) {
-			strStyle = "box-shadow: 0 0 4px rgba(30,30,30,.6);";
-			strStyle += "width:" + (windowSize.width / 1.6) + "px;";
+			strStyle = "box-shadow: 0 0 4px rgba(30,30,30,.6);";			
+			strStyle += "width:" + g.pageContentWidth + "px;";			
 		}
 		strStyle += "height:" + mGetPageHeight()*1.3 + "px;";
-		document.getElementById("mPage").setAttribute("style", strStyle);
+		document.getElementById("mPage").setAttribute("style", strStyle);		
 	}
 	
 document.addEventListener("DOMContentLoaded", function () { mResizeScreen(); }, false);

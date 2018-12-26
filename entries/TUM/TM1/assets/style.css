@@ -11,14 +11,14 @@ div#mHeaderTitle {
 div#mHeaderTitle a:visited { color: #fff; }
 div#mContent > h2 { margin: 18px 6px; font-family: 'Montserrat', sans-serif; font-size: 30px; }
 /*============================================================================================================*/
-div.mToc { margin: -20px 0 50px 0; }
-div.mToc > ol { counter-reset: li; list-style: none; *list-style: decimal; }
-div.mToc > ol > li { margin: 11px; width: 260px; }
-div.mToc > ol > li a:hover { transform: scale(1.05); background-color: #f2ecec; color: red; }
-div.mToc > ol > li a:before { position: relative; content: counter(li); counter-increment: li; padding: 6px 10px 6px 10px; 
+div#mToc { margin: -20px 0 50px 0; }
+div#mToc > ol { counter-reset: li; list-style: none; *list-style: decimal; }
+div#mToc > ol > li { margin: 11px 36px 11px 0; } /* margin: 11px; width: 260px; */
+div#mToc > ol > li a:hover { transform: scale(1.05); background-color: #f2ecec; color: red; }
+div#mToc > ol > li a:before { position: relative; content: counter(li); counter-increment: li; padding: 6px 10px 6px 10px; 
 							left: -12px; background-color: #f9340a; border-radius: 14px; color: #fff; 
 							font-weight: bold; text-shadow: 1px 0 #bfbcbb; box-shadow: -2px -1px 2px #878785;	 }
-div.mToc > ol > li a { display: block; padding: 3px; border-radius: 12px; transition: all .2s ease-in-out; 
+div#mToc > ol > li a { display: block; padding: 3px; border-radius: 12px; transition: all .2s ease-in-out; 
 					background-color: #e0dddd; color: #000; box-shadow: 2px 2px 3px #878785; }
 /*============================================================================================================*/
 div.mSection {margin-top: 10px; padding: 1px 6px 10px 6px; font-family: 'Roboto'; }
