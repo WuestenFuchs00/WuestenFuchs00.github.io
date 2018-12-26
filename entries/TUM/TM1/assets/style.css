@@ -9,7 +9,7 @@ div#mHeaderTitle {
 	padding: 10px 6px; background-color: rgba(10,109,221,.8); color: #fff; font-family: 'Notable', sans-serif;
 	font-size: 32px; font-weight: bold; box-shadow: 2px 3px 4px #696969;
 }
-div#mHeaderTitle a:visited { color: #fff; }
+div#mHeaderTitle a, div#mHeaderTitle a:visited { color: #fff; }
 div#mContent > h2 { margin: 18px 6px; font-family: 'Montserrat', sans-serif; font-size: 30px; }
 /*============================================================================================================*/
 div#mToc { margin: -20px 0 50px 0; }
