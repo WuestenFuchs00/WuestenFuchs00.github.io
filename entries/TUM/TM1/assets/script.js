@@ -4,6 +4,10 @@
  */
 
 	var g = {
+		pageID : 'mPage',
+		menueDockID : 'mMenueDock',
+		menueID : 'mMenue',
+		IsMenueShowing : false,
 		ImgScaleFactor : 1.6,
 		pageWidth : 820, // px
 		pageContentWidth : 0,
@@ -377,6 +381,29 @@
 		var mRoot = document.documentElement || document.body;
 		return mGetMaxHeight(mRoot, 0);
 	}
+
+	/*
+	 * Display menue
+	 */
+	function mShowMenue () {		
+		var menueDock = document.getElementById(g.menueDockID);
+		if ( !menueDock ) return; // Exit
+		var menue = document.getElementById(g.menueID);
+		menue.setAttribute("style", "visibility: hidden; display: none;");
+		
+		// Registers listeners
+		menueDock.addEventListener("click", () => {
+			if ( !g.IsMenueShowing ) {
+				menue.setAttribute("style", "visibility: visible; display: block;");
+				menueDock.setAttribute("style", "background-color: rgba(93,109,126,.8);");
+			}
+			else {
+				menue.setAttribute("style", "visibility: hidden; display: none;");
+				menueDock.setAttribute("style", "background-color: none;");
+			}
+			g.IsMenueShowing = !g.IsMenueShowing;
+		}, false);		
+	}
 	
 	/*
 	 * Resize screen 
@@ -390,7 +417,9 @@
 			strStyle += "width:" + g.pageContentWidth + "px;";			
 		}
 		strStyle += "height:" + mGetPageHeight()*1.3 + "px;";
-		document.getElementById("mPage").setAttribute("style", strStyle);		
+		document.getElementById(g.pageID).setAttribute("style", strStyle);
+
+		mShowMenue();
 	}
 	
 document.addEventListener("DOMContentLoaded", function () { mResizeScreen(); }, false);
