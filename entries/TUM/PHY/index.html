@@ -23,6 +23,9 @@
 			<div id="mMenue">
 				<table>
 					<tr><td></td><td><a href="index.html">Home</a></td></tr>
+					<tr><td></td><td><a href="../TM1/index.html">TM1</a></td></tr>
+					<tr><td></td><td><a href="../TM1/etest.html">TM1 E-Test</a></td></tr>
+					<tr><td></td><td><a href="../Chemie/index.html">Chemie</a></td></tr>
 					<tr><td></td><td><a href="#">Contact</a></td></tr>
 					<tr><td></td><td><a href="#">About</a></td></tr>
 					<tr class="last_menue"><td></td><td><a href="#">Imprint</a></td></tr>
@@ -34,6 +37,21 @@
 	<div id="mContent">
 		<h2>Formelsammlung</h2>
 		<div class="mSection">
+			<div class="mSubsection mParagraph"><span class="mTitle">Inertialsysteme</span></div>
+			<div class="mSubsection mIndenting">
+				<p class="mTitle rot">Galileo-Transformation</p>
+				Annahme: Zeit \( t = t' \). Für Geschwindigkeiten \( \vec{v},\,\vec{v}' \) gilt:
+				$$
+					\vec{v} = \vec{v}' + \vec{u}
+				$$
+				bzw.
+				$$
+					\vec{v}' = \vec{v} - \vec{u}
+				$$
+				mit <span style="color:red;font-style:italic;">konstanter</span> Geschwindigkeit \( \,\vec{u} \).
+			</div>
+		</div>
+		<div class="mSection">
 			<div class="mSubsection mParagraph"><span class="mTitle">Beschleunigte Bezugssysteme</span></div>
 			<div class="mSubsection mIndenting">
 				<p class="mTitle rot">Corioliskraft</p>
@@ -44,6 +62,47 @@
 				$$
 					\vec{F}_C = - m \cdot \vec{w} \times (\vec{w} \times \vec{r})
 				$$
+			</div>
+		</div>
+		<div class="mSection">
+			<div class="mSubsection mParagraph"><span class="mTitle">Relativistische Mechanik</span></div>
+			<div class="mSubsection mIndenting">
+				<p class="mTitle rot">Lorentz-Transformation</p>
+				$$
+					x' = \frac{x-ut}{\sqrt{1-u^2/c^2}}
+				$$
+				$$
+					y' = y\,,\,	z' = z
+				$$
+				$$
+					t' = \frac{t-(u x / c^2)}{\sqrt{1-u^2/c^2}}
+				$$
+				Ferner: $$ t = x / c $$
+				<p class="mTitle rot">Zeitdilatation (Zeitdehnung)</p>
+				In \( S \) stehe bei \( x_1 \) eine Uhr und gebe im Abstand \( \Delta t = t_2 - t_1 \) Signale.
+				Ein zu \( S \) bewegter Beobachter registriert zwischen zwei Signalen die Zeitdifferenz:
+				$$
+					\Delta t' = t_2' - t_1' = \frac{t_2 - t_1}{\sqrt{1-u^2/c^2}} = \frac{\Delta t}{\sqrt{1-u^2/c^2}} > \Delta t
+				$$
+				Zeit in \( S' \) ist länger als in \( S \) :
+				$$
+					\Delta t' > \Delta t
+				$$
+				<p style="font-weight:bold;">Herleitung:</p>
+				$$ t_1' = \frac{t_1 - ux_1/c^2}{\sqrt{1-u^2/c^2}} \;\;\;\;\;\;\;\;\;\;\;\; (1) $$
+				$$ t_2' = \frac{t_2 - ux_2/c^2}{\sqrt{1-u^2/c^2}} \;\;\;\;\;\;\;\;\;\;\;\; (2) $$
+				Da die Uhr in \( S \) <span style="font-style:italic;">nur</span> bei \( x_1 \) steht und sich
+				<span style="font-style:italic;">nicht</span> bewegt, muss gelten:
+				$$  x_2 = x_1 \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; (3) $$
+				Aus \( (3) \) folgt:
+				$$\begin{array}{lll}
+					\Delta t' & = & t_2' - t_1' \\
+					& = & \frac{t_1 - ux_1/c^2}{\sqrt{1-u^2/c^2}} - \frac{t_2 - ux_2/c^2}{\sqrt{1-u^2/c^2}} \\
+					& = & \frac{(t_1 - t_2) + (x_2 - x_1)u/c^2}{\sqrt{1-u^2/c^2}} \\
+					& = & \frac{(t_1 - t_2) + \overbrace{(x_1 - x_1)}^{0}u/c^2}{\sqrt{1-u^2/c^2}} \\
+					& = & \frac{(t_1 - t_2)}{\sqrt{1-u^2/c^2}} \\
+					& = & \frac{\Delta t}{\sqrt{1-u^2/c^2}} \\
+				\end{array}$$
 			</div>
 		</div>
 	</div>
