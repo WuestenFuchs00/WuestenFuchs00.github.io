@@ -17,7 +17,7 @@
 		Si: { bezeichnung: 'Silicium',    symbol: 'Si', ordnung: 14, periode: 3,  gruppe: 14 },
 		P:  { bezeichnung: 'Phosphor',    symbol: 'P',  ordnung: 15, periode: 3,  gruppe: 15 },
 		S:  { bezeichnung: 'Schwefel',    symbol: 'S',  ordnung: 16, periode: 3,  gruppe: 16 },
-		Si: { bezeichnung: 'Chlor',       symbol: 'Cl', ordnung: 17, periode: 3,  gruppe: 17 },
+		Cl: { bezeichnung: 'Chlor',       symbol: 'Cl', ordnung: 17, periode: 3,  gruppe: 17 },
 		Ar: { bezeichnung: 'Argon',       symbol: 'Ar', ordnung: 18, periode: 3,  gruppe: 18 },
 		
 		K:  { bezeichnung: 'Kalium',      symbol: 'K',  ordnung: 19, periode: 4,  gruppe: 1 },
@@ -143,14 +143,14 @@
 	 * 	K, L, M, N, O, P, Q
 	 * ========================
 	 * Aufbauprinzip: (Nur bis 7. Periode)
-	 * 	1s(2) 2s(2) 2p(6) 3s(2) 3p(6) 4s(2) 3d(10) 4p(6) 5s(2) 4d(10) 5p(6) 6s(2) 4f(14) 5d(10) 6p(6) 7s(2) 5f(14) 6d(10) 7p(6) 5g(18) 6f(14) 7d(10) 6g(18) 7f(14) 6h(22) 7g(18) 7h(22) 7i(26)
+	 * 	1s(2) 2s(2) 2p(6) 3s(2) 3p(6) 4s(2) 3d(10) 4p(6) 5s(2) 4d(10) 5p(6) 6s(2) 4f(14) 5d(10) 6p(6) 7s(2) 5f(14) 6d(10) 7p(6) 8s(2) 5g(18) 6f(14) 7d(10) 8p(6) ps(2) 6g(18) 7f(14) 8d(10) 9p(6)
 	 * ========================
 	 * Links:
 	 *  [1] https://de.wikipedia.org/wiki/Elektronenkonfiguration
 	 *	[2] https://de.wikipedia.org/wiki/Aufbauprinzip
 	 */
 	function Elektronenkonfiguration (strSymbol) {
-		var Aufbauprinzip = ["1s","2s","2p","3s","3p","4s","3d","4p","5s","4d","5p","6s","4f","5d","6p","7s","5f","6d","7p","5g","6f","7d","6g","7f","6h","7g","7h","7i"];
+		var Aufbauprinzip = ["1s","2s","2p","3s","3p","4s","3d","4p","5s","4d","5p","6s","4f","5d","6p","7s","5f","6d","7p","8s","5g","6f","7d","8p","9s","6g","7f","8d","9p"];
 		var ordnung = 0;
 		var isFound = false;
 		for ( var elem in PSE ) {
