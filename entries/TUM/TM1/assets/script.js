@@ -194,6 +194,36 @@
 					}, // calc
 				}
 			}, // etest4
+			etest5 : function () {
+				var mE5_frm = document.frm_TM1_ETest_5,
+					mE5_q = mE5_frm.frm_TM1_ETest_5_q,
+					mE5_F = mE5_frm.frm_TM1_ETest_5_F,
+					mE5_M = mE5_frm.frm_TM1_ETest_5_M,
+					mE5_x1 = mE5_frm.frm_TM1_ETest_5_x1,
+					mE5_x2 = mE5_frm.frm_TM1_ETest_5_x2,
+					mE5_y1 = mE5_frm.frm_TM1_ETest_5_y1,
+					mE5_y2 = mE5_frm.frm_TM1_ETest_5_y2,
+					mE5_AH = mE5_frm.frm_TM1_ETest_5_AH;
+				return {
+					reset : function () {
+						mE5_q.value = "52,3"; mE5_F.value = "45,0"; mE5_M.value = "39,2"; mE5_AH.value = "?"
+						mE5_x1.value = "4,1"; mE5_x2.value = "4,1"; mE5_y1.value = "3,2"; mE5_y2.value = "4,1";						
+					}, // reset
+					calc : function () {
+						mE5_q = parseFloat(mTools().replaceCommaByDot(mE5_q.value));
+						mE5_F = parseFloat(mTools().replaceCommaByDot(mE5_F.value));
+						mE5_M = parseFloat(mTools().replaceCommaByDot(mE5_M.value));
+						mE5_x2 = parseFloat(mTools().replaceCommaByDot(mE5_x2.value));
+						mE5_y1 = parseFloat(mTools().replaceCommaByDot(mE5_y1.value));
+						mE5_y2 = parseFloat(mTools().replaceCommaByDot(mE5_y2.value));
+						
+						var AH = (mE5_M - mE5_F * mE5_x2) / (mE5_x2 + mE5_y1);
+						AH -= (mE5_q * mE5_y2) * 0.5;
+						AH =  mTools().round(AH,1); // Auf eine Nachkommastelle runden						
+						mE5_AH.value = mTools().formatResult(AH);
+					}, // calc
+				}
+			}, // etest5
 			/*
 			 *
 			 */

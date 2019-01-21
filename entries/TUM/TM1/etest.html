@@ -43,6 +43,7 @@
 				<li><a href="#ETest2">E-Test 2</a></li>
 				<li><a href="#ETest3">E-Test 3</a></li>
 				<li><a href="#ETest4">E-Test 4</a></li>
+				<li><a href="#ETest5">E-Test 5</a></li>
 			</ol>
 		</div>
 		<div class="mSection">
@@ -246,6 +247,47 @@
 				<img src="media/TM1_ETest_4_verlauf_Q.png" onload="mResizeImg(this);" border="1" /><br />
 				<img src="media/TM1_ETest_4_verlauf_M.png" onload="mResizeImg(this);" border="1" /><br />
 				\( \blacksquare \)
+				&nbsp;&nbsp;<a href="#Inhaltsverzeichnis">[Top]</a>
+			</div>
+		</div>
+		<!-- E-Test 5 -->
+		<div class="mSection">
+			<div class="mSubsection">
+				<p><b><a name="ETest5">E-Test 5</a></b>&nbsp;&nbsp;<a href="#Inhaltsverzeichnis">[Top]</a></p>
+				<p><a href="media/TM1_ETest_5.png" target="_blank"><img src="media/TM1_ETest_5.png" onload="mResizeImg(this);" border="1" /></a></p>
+			</div>
+		</div>
+		<div class="mSection">
+			<div class="mSubsection">
+				<b>Lösung:</b>
+				<p>
+					<form id="frm_TM1_ETest_5" name="frm_TM1_ETest_5" style="width: 380px; background-color: rgba(80,80,80,.2); padding: 1px 8px 8px 8px;">
+						<p>Tool zum Berechnen der horizontalen Lagerkraft \( A_H \):</p>
+						<label>\( q \) : &nbsp;&nbsp;&nbsp;</label><input name="frm_TM1_ETest_5_q" class="mTextRight" type="text" minlength="4" maxlength="10" size="8" /> kN/m&nbsp;&nbsp;&nbsp;&nbsp;
+						<input class="mButton" type="button" value="Reset" onclick="mTools().etest5().reset()" /><br />
+						<label>\( F \) : &nbsp;&nbsp;</label><input name="frm_TM1_ETest_5_F" class="mTextRight" type="text" minlength="4" maxlength="10" size="8" /> kN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input class="mButton" type="button" value="Löschen" onclick="mTools().clear(this)" /><br />
+						<label>\( M \) : &nbsp;</label><input name="frm_TM1_ETest_5_M" class="mTextRight" type="text" minlength="4" maxlength="10" size="8" /> kNm&nbsp;&nbsp;&nbsp;<br />
+						<label>\( x_1 \) : &nbsp;</label><input name="frm_TM1_ETest_5_x1" class="mTextRight" type="text" minlength="4" maxlength="10" size="8" /> m<br />
+						<label>\( x_2 \) : &nbsp;</label><input name="frm_TM1_ETest_5_x2" class="mTextRight" type="text" minlength="4" maxlength="10" size="8" /> m<br />
+						<label>\( y_1 \) : &nbsp;</label><input name="frm_TM1_ETest_5_y1" class="mTextRight" type="text" minlength="4" maxlength="10" size="8" /> m<br />
+						<label>\( y_2 \) : &nbsp;</label><input name="frm_TM1_ETest_5_y2" class="mTextRight" type="text" minlength="4" maxlength="10" size="8" /> m &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input class="mButton" type="button" value="Rechnen" onclick= "mTools().etest5().calc()" /><br />
+						<hr />
+						<label>\( A_H \) : &nbsp;</label><input name="frm_TM1_ETest_5_AH" class="mTextRight readOnly" type="text" value="?" minlength="4" maxlength="10" size="10" readonly /> kN						
+					</form>
+					<script type="text/javascript">mTools().etest5().reset();</script>
+				</p>
+				<p>
+					$$
+						A_H = \frac{M-F\cdot x_2}{x_2 + y_1}-\frac{q\cdot y_2}{2}
+					$$
+					<ul>
+						<li><a href="media/TM1_ETest_5_Polplan.png">Polplan</a></li>
+						<li><a href="media/TM1_ETest_5_Verschiebungsfigur.png">Verschiebungsfigur</a></li>
+						<li><a href="media/TM1_ETest_5_Verschiebungsfigur_extended.png">Verschiebungsfigur (2)</a></li>
+					</ul>
+				</p>
 				&nbsp;&nbsp;<a href="#Inhaltsverzeichnis">[Top]</a>
 			</div>
 		</div>
